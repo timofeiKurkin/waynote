@@ -1,0 +1,31 @@
+<tui-root>
+<div class="container">
+    @if (mapProps()) {
+        <y-map (ready)="onMapReady($event)"
+                [props]="mapProps()"
+        >
+            <y-map-default-scheme-layer />
+            <y-map-default-features-layer />
+
+
+            @if (featureProps()) {
+                <y-map-feature
+                        [props]="featureProps()"
+                />
+            }
+
+
+        </y-map>
+    }
+</div>
+
+<div>
+    <label for="file-input">Загрузить GPX файл</label>
+    <input #fileInput id="file-input" type="file" [formControl]="fileControl">
+
+    <button>Загрузить</button>
+</div>
+
+<router-outlet></router-outlet>
+
+</tui-root>
