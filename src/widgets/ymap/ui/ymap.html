@@ -1,8 +1,7 @@
 @if (mapProps() && featureProps()) {
-    <y-map [props]="mapProps()" class="container">
+    <y-map [props]="mapProps()" class="container" [style.width]="mapSize() + 'px'" [style.height]="mapSize() + 'px'">
         <y-map-default-scheme-layer/>
         <y-map-default-features-layer/>
-
 
         @if (featureProps()) {
             <y-map-feature

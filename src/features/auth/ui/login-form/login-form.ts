@@ -19,6 +19,9 @@ import { TuiFieldErrorPipe } from '@taiga-ui/kit';
 import { LoginFormControls } from '../../model/loginForm';
 import { UserService } from '../../../../entities/user/api/user-service';
 import { passwordValidationRegx } from '../../../../shared/const/validations';
+import { AuthService } from '../../../../entities/user/state/auth-service';
+import { Router } from '@angular/router';
+import { googleAuthHandler } from '../../libs/auth';
 
 @Component({
   selector: 'app-login-form',
@@ -40,8 +43,6 @@ import { passwordValidationRegx } from '../../../../shared/const/validations';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginForm {
-  constructor(private userService: UserService) {}
-
   loginForm = new FormGroup<LoginFormControls>({
     email: new FormControl(null, {
       validators: [
@@ -60,6 +61,12 @@ export class LoginForm {
     }),
   });
 
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   login() {
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsDirty();
@@ -70,5 +77,9 @@ export class LoginForm {
     if (email && password) {
       this.userService.login(email, password).then();
     }
+  }
+
+  googleAuth() {
+    googleAuthHandler.call(this);
   }
 }

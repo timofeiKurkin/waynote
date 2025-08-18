@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { YMapFeatureProps, YMapProps } from 'ymaps3';
-import { ParsedGPX } from '@we-gold/gpxjs';
+import { ParsedGPX, ParsedGPXInputs } from '@we-gold/gpxjs';
 import { getMaxZoomForBounds, parseTrackPoints } from '../libs/parseGPXFile';
 import {
   YMapComponent,
@@ -30,10 +30,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Ymap implements OnChanges {
-  GPX = input<ParsedGPX | null>();
+  mapSize = input.required<number>();
+  GPX = input<ParsedGPX | ParsedGPXInputs | null>();
 
   mapProps = signal<YMapProps | null>(null);
   featureProps = signal<YMapFeatureProps | null>(null);
+  protected readonly screen = screen;
 
   ngOnChanges() {
     const GPX = this.GPX();
@@ -43,7 +45,7 @@ export class Ymap implements OnChanges {
     }
 
     const { yPoints, bounds, center } = parseTrackPoints(GPX.tracks[0].points);
-    const minZoom = getMaxZoomForBounds(bounds, 600);
+    const minZoom = getMaxZoomForBounds(bounds, this.mapSize());
 
     this.mapProps.set({
       theme: 'light',

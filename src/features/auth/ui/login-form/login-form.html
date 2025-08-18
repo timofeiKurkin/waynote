@@ -1,8 +1,8 @@
 <form
         (submit)="login()"
-        tuiForm="l"
         [formGroup]="loginForm"
         [style.max-width.rem]="35"
+        tuiForm="l"
 >
     <header tuiHeader>
         <h3 tuiTitle>
@@ -12,34 +12,34 @@
     </header>
 
     <tui-textfield>
-        <label tuiLabel for="email">Email</label>
+        <label for="email" tuiLabel>Email</label>
         <input
-                id="email"
                 formControlName="email"
+                id="email"
                 placeholder="Email"
                 tuiTextfield
         />
     </tui-textfield>
 
     <tui-error
-            formControlName="email"
             [error]="[] | tuiFieldError | async"
+            formControlName="email"
     />
 
 
     <tui-textfield>
-        <label tuiLabel for="password">Пароль</label>
+        <label for="password" tuiLabel>Пароль</label>
         <input
-                id="password"
                 formControlName="password"
+                id="password"
                 tuiTextfield
                 type="password"
         />
         <!--        <tui-icon tuiPassword/>-->
     </tui-textfield>
     <tui-error
-            formControlName="password"
             [error]="[] | tuiFieldError | async"
+            formControlName="password"
     />
 
     <footer>
@@ -51,3 +51,15 @@
         </button>
     </footer>
 </form>
+
+
+<hr>
+
+<button
+        (click)="googleAuth()"
+        appearance="primary"
+        tuiButton
+        type="button"
+>
+    Войти через Google
+</button>

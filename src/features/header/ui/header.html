@@ -24,6 +24,8 @@
     <div>
         @if (isAuth) {
             {{ user.email }}
+
+            <button (click)="logout()">выйти</button>
         } @else {
             <div>
                 <a tuiLink routerLink="/login"> Войти </a>

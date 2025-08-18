@@ -19,6 +19,9 @@ import { TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { RegistrationFormControls } from '../../model/loginForm';
 import { passwordValidationRegx } from '../../../../shared/const/validations';
 import { UserService } from '../../../../entities/user/api/user-service';
+import { AuthService } from '../../../../entities/user/state/auth-service';
+import { Router } from '@angular/router';
+import { googleAuthHandler } from '../../libs/auth';
 
 @Component({
   selector: 'app-registration-form',
@@ -41,8 +44,6 @@ import { UserService } from '../../../../entities/user/api/user-service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationForm {
-  constructor(private userService: UserService) {}
-
   registrationForm = new FormGroup<RegistrationFormControls>({
     email: new FormControl(null, {
       validators: [
@@ -62,6 +63,12 @@ export class RegistrationForm {
     policy: new FormControl(false, [Validators.required]),
   });
 
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   registration() {
     if (!this.registrationForm.valid) {
       this.registrationForm.markAllAsDirty();
@@ -72,5 +79,9 @@ export class RegistrationForm {
     if (email && password && policy) {
       this.userService.register(email, password).then();
     }
+  }
+
+  googleAuth() {
+    googleAuthHandler.call(this);
   }
 }

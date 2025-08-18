@@ -9,17 +9,21 @@ import {
   TuiLabel,
   TuiTextfieldComponent,
   TuiTextfieldDirective,
+  TuiTextfieldDropdownDirective,
   TuiTitle,
 } from '@taiga-ui/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   TuiFieldErrorPipe,
+  TuiInputYear,
   TuiTextarea,
   TuiTextareaLimit,
-  TuiTooltip,
 } from '@taiga-ui/kit';
+import { RouteService } from '../../entities/route/api/route-service';
+import { IRoute } from '../../entities/route/models/interface';
+import { AuthService } from '../../entities/user/state/auth-service';
 
 @Component({
   selector: 'app-create-route-page',
@@ -35,12 +39,13 @@ import {
     ReactiveFormsModule,
     TuiTextfieldComponent,
     TuiError,
-    TuiTooltip,
     TuiTextfieldDirective,
     TuiLabel,
     TuiFieldErrorPipe,
     TuiTextarea,
     TuiTextareaLimit,
+    TuiInputYear,
+    TuiTextfieldDropdownDirective,
   ],
   templateUrl: './create-route-page.html',
   styleUrl: './create-route-page.less',
@@ -48,11 +53,18 @@ import {
 })
 export class CreateRoutePage {
   GPX = signal<ParsedGPX | null>(null);
-
   routeForm = new FormGroup({
-    routeTitle: new FormControl(null),
-    routeDescription: new FormControl(null),
+    title: new FormControl(null),
+    description: new FormControl(null),
+    city: new FormControl(null),
+    year: new FormControl(null),
   });
+
+  constructor(
+    private routeService: RouteService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   loadFile(file: ParsedGPX) {
     if (file) {
@@ -65,9 +77,29 @@ export class CreateRoutePage {
       this.routeForm.markAllAsDirty();
     }
 
-    const { routeTitle, routeDescription } = this.routeForm.value;
+    const { title, description, city, year } = this.routeForm.value;
 
-    if (routeTitle && routeDescription) {
+    if (title && description) {
+      const { routes, tracks, metadata, waypoints } = this.GPX();
+
+      const routeData: IRoute = {
+        title,
+        city,
+        year,
+        description,
+        ownerId: this.authService.user.uid,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+
+        routes,
+        tracks,
+        metadata,
+        waypoints,
+      };
+
+      this.routeService.createRoute(routeData).then(() => {
+        this.router.navigate(['/my-routes']).then();
+      });
     }
   }
 }

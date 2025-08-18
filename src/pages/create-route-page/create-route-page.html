@@ -12,23 +12,50 @@
 
     <app-drop-zone (loadGPX)="loadFile($event)"></app-drop-zone>
 
-    <app-ymap [GPX]="GPX()"></app-ymap>
+    <app-ymap [GPX]="GPX()" [mapSize]="500"></app-ymap>
 
     <tui-textfield>
         <label for="route-title" tuiLabel>Название маршрута</label>
         <input
-                formControlName="routeTitle"
+                formControlName="title"
                 id="route-title"
-                placeholder="Field placeholder"
+                placeholder="Название"
                 tuiTextfield
         />
-        <tui-icon tuiTooltip="Не стесняйтесь"/>
     </tui-textfield>
-
-    <tui-error
-            [error]="[] | tuiFieldError | async"
-            formControlName="routeTitle"
+    <tui-error [error]="[] | tuiFieldError | async"
+               formControlName="title"
     />
+
+    <fieldset>
+        <tui-textfield>
+            <label for="route-title" tuiLabel>Город</label>
+            <input
+                    formControlName="city"
+                    id="route-title"
+                    placeholder="Город"
+                    tuiTextfield
+            />
+        </tui-textfield>
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="city"
+        />
+
+        <tui-textfield>
+            <label for="route-year" tuiLabel>Укажите дату создания маршрута</label>
+            <input
+                    [max]="2025"
+                    [min]="2018"
+                    formControlName="year"
+                    id="route-year"
+                    tuiInputYear
+            />
+            <tui-calendar-year *tuiTextfieldDropdown/>
+        </tui-textfield>
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="year"
+        />
+    </fieldset>
 
     <tui-textfield>
         <label for="route-description" tuiLabel>Limit</label>
@@ -36,16 +63,14 @@
                 [limit]="300"
                 [max]="6"
                 [min]="3"
-                formControlName="routeDescription"
+                formControlName="description"
                 id="route-description"
                 placeholder="Placeholder"
                 tuiTextarea
         ></textarea>
     </tui-textfield>
-
-    <tui-error
-            [error]="[] | tuiFieldError | async"
-            formControlName="routeDescription"
+    <tui-error [error]="[] | tuiFieldError | async"
+               formControlName="description"
     />
 
 

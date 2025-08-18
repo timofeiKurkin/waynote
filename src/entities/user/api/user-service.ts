@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UserServiceBase } from '../models/api';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -11,16 +10,16 @@ import { firebaseAuth } from '../../../shared/api/firebase/firebase';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService implements UserServiceBase {
-  async register(email: string, password: string): Promise<UserCredential> {
-    return await createUserWithEmailAndPassword(firebaseAuth, email, password);
+export class UserService {
+  register(email: string, password: string): Promise<UserCredential> {
+    return createUserWithEmailAndPassword(firebaseAuth, email, password);
   }
 
-  async login(email: string, password: string): Promise<UserCredential> {
-    return await signInWithEmailAndPassword(firebaseAuth, email, password);
+  login(email: string, password: string): Promise<UserCredential> {
+    return signInWithEmailAndPassword(firebaseAuth, email, password);
   }
 
-  async logout() {
-    await signOut(firebaseAuth);
+  logout() {
+    return signOut(firebaseAuth);
   }
 }

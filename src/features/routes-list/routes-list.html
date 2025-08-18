@@ -1,0 +1,16 @@
+@if (routes()) {
+    <ul>
+        @for (route of routes(); track route.id) {
+            <li>
+                <app-ymap [mapSize]="300" [GPX]="route.gpx"></app-ymap>
+
+                <h3>{{ route.title }}</h3>
+                <p>{{ route.description }}</p>
+                <div>
+                    <p>{{ route.city }}</p>
+                    <p>{{ route.year }}</p>
+                </div>
+            </li>
+        }
+    </ul>
+}

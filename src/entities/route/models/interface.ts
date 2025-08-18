@@ -1,7 +1,12 @@
-import { MetaData, Track, Waypoint } from '@we-gold/gpxjs';
-import { Route } from '@angular/router';
+import {
+  MetaData,
+  ParsedGPXInputs,
+  Route,
+  Track,
+  Waypoint,
+} from '@we-gold/gpxjs';
 
-export interface IRoutePreview {
+export interface IRoute {
   ownerId: string;
   title: string;
   city: string;
@@ -14,4 +19,18 @@ export interface IRoutePreview {
   tracks: Track[];
   routes: Route[];
   waypoints: Waypoint[];
+}
+
+export interface RoutePreview {
+  title: string;
+  city: string;
+  year: number;
+  description: string;
+  createdAt: Date;
+
+  gpx: ParsedGPXInputs;
+}
+
+export interface WithID {
+  id: string;
 }
