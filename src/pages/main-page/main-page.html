@@ -1,0 +1,54 @@
+<div>
+    <tui-textfield
+            multi
+            tuiChevron
+    >
+        <label for="filter-city" tuiLabel>Фильтр по городам</label>
+        <input
+                [formControl]="cityFiltering"
+                [placeholder]="cityFiltering.value.length ? '' : 'Выберите из списка'"
+                id="filter-city"
+                tuiInputChip
+                tuiSelectLike
+        />
+        <tui-data-list-wrapper
+                *tuiTextfieldDropdown
+                [items]="cities"
+                new
+                tuiMultiSelectGroup
+        />
+    </tui-textfield>
+
+    <tui-textfield
+            multi
+            tuiChevron
+    >
+        <label for="filter-year" tuiLabel>Фильтр по годам</label>
+        <input
+                [formControl]="yearFiltering"
+                [placeholder]="yearFiltering.value.length ? '' : 'Pick from the list'" id="filter-year"
+                tuiInputChip
+                tuiSelectLike
+        />
+        <tui-data-list-wrapper
+                *tuiTextfieldDropdown
+                [items]="years"
+                new
+                tuiMultiSelectGroup
+        />
+    </tui-textfield>
+</div>
+
+<button
+        appearance="primary"
+        routerLink="/create-route"
+        size="m"
+        tuiButton
+        type="button"
+>
+    <tui-icon
+            [style.height.rem]="1"
+            icon="@tui.plus"
+    />
+    Создать маршрут
+</button>

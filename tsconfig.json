@@ -5,14 +5,12 @@
     "target": "es2022",
     "module": "preserve",
     "lib": ["es2020", "dom"],
-	"skipLibCheck": true,
-	"paths": {
-	"ymaps3": [
-	  "./node_modules/@yandex/ymaps3-types"
-	]
-	},
-	"types": ["@@yandex/ymaps3-types"],
-	"isolatedModules": true
+    "skipLibCheck": true,
+    "paths": {
+      "ymaps3": ["./node_modules/@yandex/ymaps3-types"]
+    },
+    "types": ["@@yandex/ymaps3-types"],
+    "isolatedModules": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

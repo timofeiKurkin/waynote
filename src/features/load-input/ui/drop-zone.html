@@ -1,0 +1,45 @@
+<div>
+    @if (!dropZoneControl.value) {
+        <label tuiInputFiles>
+            <input accept=".gpx"
+                   tuiInputFiles
+                   [formControl]="dropZoneControl"
+            />
+        </label>
+
+    }
+
+    <tui-files class="tui-space_top-1">
+        @let error = dropZoneControl.value | tuiFileRejected: {accept: '.gpx'} | async;
+        @if (error) {
+            <tui-file state="error"
+                      [file]="error"
+                      (remove)="removeFile()"
+            />
+        }
+
+        @let loadedFile = loadedFile$ | async;
+        @if (loadedFile) {
+            <tui-file [file]="loadedFile"
+                      (remove)="removeFile()"
+            />
+        }
+
+        @let failedFile = failedFile$ | async;
+        @if (failedFile) {
+            <tui-file state="error"
+                      [file]="failedFile"
+                      (remove)="removeFile()"
+            />
+
+        }
+
+        @let loadingFiles = loadingFile$ | async;
+        @if (loadingFiles) {
+            <tui-file state="loading"
+                      [file]="loadingFiles"
+                      (remove)="removeFile()"
+            />
+        }
+    </tui-files>
+</div>

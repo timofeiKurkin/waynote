@@ -33,6 +33,11 @@
       "linter": "eslint",
       "style": "less",
       "unitTestRunner": "none"
+    },
+    "@nx/angular:component": {
+      "style": "less",
+      "standalone": true,
+      "changeDetection": "OnPush"
     }
   },
   "defaultProject": "course-work"

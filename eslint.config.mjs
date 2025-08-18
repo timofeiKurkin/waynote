@@ -42,6 +42,7 @@ export default [
           style: 'kebab-case',
         },
       ],
+      '@angular-eslint/prefer-inject': 'off',
     },
   },
   {

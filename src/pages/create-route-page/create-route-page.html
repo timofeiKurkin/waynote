@@ -1,0 +1,71 @@
+<form
+        (submit)="createRoute()"
+        [formGroup]="routeForm"
+        tuiForm="l"
+>
+    <header tuiHeader>
+        <h3 tuiTitle>
+            Загрузить свой маршрут
+            <span tuiSubtitle>Загрузите свой маршрут в GPX формате, чтобы поделиться им с другими</span>
+        </h3>
+    </header>
+
+    <app-drop-zone (loadGPX)="loadFile($event)"></app-drop-zone>
+
+    <app-ymap [GPX]="GPX()"></app-ymap>
+
+    <tui-textfield>
+        <label for="route-title" tuiLabel>Название маршрута</label>
+        <input
+                formControlName="routeTitle"
+                id="route-title"
+                placeholder="Field placeholder"
+                tuiTextfield
+        />
+        <tui-icon tuiTooltip="Не стесняйтесь"/>
+    </tui-textfield>
+
+    <tui-error
+            [error]="[] | tuiFieldError | async"
+            formControlName="routeTitle"
+    />
+
+    <tui-textfield>
+        <label for="route-description" tuiLabel>Limit</label>
+        <textarea
+                [limit]="300"
+                [max]="6"
+                [min]="3"
+                formControlName="routeDescription"
+                id="route-description"
+                placeholder="Placeholder"
+                tuiTextarea
+        ></textarea>
+    </tui-textfield>
+
+    <tui-error
+            [error]="[] | tuiFieldError | async"
+            formControlName="routeDescription"
+    />
+
+
+    <footer>
+        <button
+                tuiButton
+                type="submit"
+        >
+            Добавить маршрут
+        </button>
+        <button
+                appearance="flat"
+                routerLink="/"
+                tuiButton
+                type="button"
+        >
+            Отмена
+        </button>
+    </footer>
+</form>
+
+
+

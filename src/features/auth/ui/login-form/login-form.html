@@ -1,0 +1,53 @@
+<form
+        (submit)="login()"
+        tuiForm="l"
+        [formGroup]="loginForm"
+        [style.max-width.rem]="35"
+>
+    <header tuiHeader>
+        <h3 tuiTitle>
+            Войти в аккаунт
+            <span tuiSubtitle>Найди свой маршрут в WAYNOTE</span>
+        </h3>
+    </header>
+
+    <tui-textfield>
+        <label tuiLabel for="email">Email</label>
+        <input
+                id="email"
+                formControlName="email"
+                placeholder="Email"
+                tuiTextfield
+        />
+    </tui-textfield>
+
+    <tui-error
+            formControlName="email"
+            [error]="[] | tuiFieldError | async"
+    />
+
+
+    <tui-textfield>
+        <label tuiLabel for="password">Пароль</label>
+        <input
+                id="password"
+                formControlName="password"
+                tuiTextfield
+                type="password"
+        />
+        <!--        <tui-icon tuiPassword/>-->
+    </tui-textfield>
+    <tui-error
+            formControlName="password"
+            [error]="[] | tuiFieldError | async"
+    />
+
+    <footer>
+        <button
+                tuiButton
+                type="submit"
+        >
+            Войти
+        </button>
+    </footer>
+</form>

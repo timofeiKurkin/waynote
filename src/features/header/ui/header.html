@@ -1,0 +1,35 @@
+<div>
+    <a routerLink="/">
+        <img
+                alt="waynote - logo"
+                height="33"
+                ngSrc="/logo.png"
+                priority
+                width="147"/>
+    </a>
+
+    <tui-tabs-with-more
+            [(activeItemIndex)]="activeItemIndex"
+            [underline]="false"
+            class="custom">
+        <button *tuiItem routerLink="/" tuiTab type="button">Главная</button>
+        <button *tuiItem routerLink="/my-routes" tuiTab type="button">
+            Мои маршруты
+        </button>
+        <button *tuiItem routerLink="/settings" tuiTab type="button">
+            Настройки
+        </button>
+    </tui-tabs-with-more>
+
+    <div>
+        @if (isAuth) {
+            {{ user.email }}
+        } @else {
+            <div>
+                <a tuiLink routerLink="/login"> Войти </a>
+                /
+                <a tuiLink routerLink="/register"> Регистрация </a>
+            </div>
+        }
+    </div>
+</div>
