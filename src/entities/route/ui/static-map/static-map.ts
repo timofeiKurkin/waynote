@@ -5,7 +5,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ParsedGPX, ParsedGPXInputs } from '@we-gold/gpxjs';
 import { RouteService } from '../../api/route-service';
 import {
@@ -18,7 +18,7 @@ import { DataLoader } from '../../../../shared/ui/data-loader/data-loader';
 
 @Component({
   selector: 'app-static-map',
-  imports: [CommonModule, DataLoader, NgOptimizedImage],
+  imports: [CommonModule, DataLoader],
   templateUrl: './static-map.html',
   styleUrl: './static-map.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,7 +27,7 @@ export class StaticMap implements OnInit {
   mapSize = input.required<number>();
   GPX = input<ParsedGPX | ParsedGPXInputs | null>();
 
-  readonly staticMap = signal<string | null>(null);
+  readonly staticMap = signal<string>('');
 
   constructor(
     private routeService: RouteService,

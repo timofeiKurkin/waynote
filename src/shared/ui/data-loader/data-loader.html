@@ -1,5 +1,5 @@
 @if (isLoading()) {
-    <tui-loader/>
+    <tui-loader size="xl" [style.overflow]="'visible'"/>
 } @else if (isError()) {
     <tui-block-status class="tui-space_vertical-12">
         <h1 class="tui-text_h1">

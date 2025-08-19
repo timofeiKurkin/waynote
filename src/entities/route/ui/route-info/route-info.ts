@@ -100,8 +100,8 @@ export class RouteInfo implements OnInit {
         map(route => {
           const xml = GPXToString(route.gpx);
           const blob = new Blob([xml], { type: 'application/gpx+xml' });
-          const url = window.URL.createObjectURL(blob);
-          const a = window.document.createElement('a');
+          const url = URL.createObjectURL(blob);
+          const a = this.window.document.createElement('a');
           a.href = url;
           a.download = route.title + '.gpx';
           a.click();
