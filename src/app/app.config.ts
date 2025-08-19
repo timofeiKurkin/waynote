@@ -32,6 +32,7 @@ export const appConfig: ApplicationConfig = {
         }
       });
 
+      // Авторизация через редирект в google, а потом обратно в приложение.
       // getRedirectResult(firebaseAuth)
       //   .then(res => {
       //     console.log(res);

@@ -1,0 +1,43 @@
+@let routeItem = routeItem$ | async;
+<app-data-loader
+        [isError]="isError"
+        [isLoading]="!isError && routeItem === null">
+    @if (routeItem) {
+        <div class="route-info-wrapper">
+            <app-ymap [mapSize]="600" [GPX]="routeItem.gpx"></app-ymap>
+
+            <div>
+                <h2 tuiTitle="l">
+                    {{ routeItem.title }}
+                    <div tuiSubtitle>
+                        {{ routeItem.city }} | {{ routeItem.year }}
+                    </div>
+                </h2>
+
+                <p class="tui-text_body-l-2">
+                    {{ routeItem.description }}
+                </p>
+
+                <div orientation="vertical"
+                     tuiGroup
+                     class="group"
+                >
+                    <span tuiBlock>Дата создания {{ routeItem.createdAt | tuiFormatDate | async }}</span>
+                    <span tuiBlock>Дата последнего обновления {{ routeItem.updatedAt | tuiFormatDate | async }}</span>
+                </div>
+
+                <hr class="tui-space_vertical-8"/>
+
+                <button appearance="primary"
+                        tuiButton
+                        size="l"
+                        [loading]="isDownloading()"
+                        (click)="downloadGPX()"
+                        type="button"
+                >
+                    Скачать маршрут (GPX формат)
+                </button>
+            </div>
+        </div>
+    }
+</app-data-loader>

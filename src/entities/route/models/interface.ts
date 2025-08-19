@@ -1,10 +1,5 @@
-import {
-  MetaData,
-  ParsedGPXInputs,
-  Route,
-  Track,
-  Waypoint,
-} from '@we-gold/gpxjs';
+import { MetaData, ParsedGPX, Route, Track, Waypoint } from '@we-gold/gpxjs';
+import { Timestamp } from 'firebase/firestore';
 
 export interface IRoute {
   ownerId: string;
@@ -12,8 +7,8 @@ export interface IRoute {
   city: string;
   year: number;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 
   metadata: MetaData;
   tracks: Track[];
@@ -32,5 +27,10 @@ export interface RoutePreview extends WithID {
   description: string;
   createdAt: Date;
 
-  gpx: ParsedGPXInputs;
+  gpx: ParsedGPX;
+}
+
+export interface RouteInfoType extends RoutePreview {
+  ownerId: string;
+  updatedAt: Date;
 }

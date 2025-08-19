@@ -44,6 +44,7 @@ import { readGPXFile, stringToGPX } from '../ymap/libs/stringToGPX';
 import { catchError, EMPTY, map, take } from 'rxjs';
 import { IRoute } from '../../entities/route/models/interface';
 import { formValidationErrors } from '../../shared/libs/formValidationErrors';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-create-route-form',
@@ -157,8 +158,8 @@ export class CreateRouteForm {
         year,
         description,
         ownerId: this.authService.user.uid,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
 
         routes,
         tracks,
