@@ -20,8 +20,8 @@ import {
   Subject,
   switchMap,
 } from 'rxjs';
-import { stringToGPX } from '../../../widgets/ymap/libs/stringToGPX';
 import { TuiError } from '@taiga-ui/core';
+import { formValidationErrors } from '../../../shared/libs/formValidationErrors';
 
 @Component({
   selector: 'app-drop-zone',
@@ -39,6 +39,7 @@ import { TuiError } from '@taiga-ui/core';
   templateUrl: './drop-zone.html',
   styleUrl: './drop-zone.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [formValidationErrors],
 })
 export class DropZone {
   loadGPX = output<TuiFileLike>();

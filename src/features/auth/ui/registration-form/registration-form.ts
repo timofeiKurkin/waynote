@@ -23,6 +23,7 @@ import { passwordValidationRegx } from '../../../../shared/const/validations';
 import { UserService } from '../../../../entities/user/api/user-service';
 import { AuthFormWrapper } from '../../../../shared/ui/auth-form-wrapper/auth-form-wrapper';
 import { AuthGoogle } from '../auth-google/auth-google';
+import { formValidationErrors } from '../../../../shared/libs/formValidationErrors';
 
 @Component({
   selector: 'app-registration-form',
@@ -48,6 +49,7 @@ import { AuthGoogle } from '../auth-google/auth-google';
   templateUrl: './registration-form.html',
   styleUrl: './registration-form.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [formValidationErrors],
 })
 export class RegistrationForm {
   registrationForm = new FormGroup<RegistrationFormControls>({

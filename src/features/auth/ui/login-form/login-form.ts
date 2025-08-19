@@ -23,6 +23,7 @@ import { UserService } from '../../../../entities/user/api/user-service';
 import { passwordValidationRegx } from '../../../../shared/const/validations';
 import { AuthFormWrapper } from '../../../../shared/ui/auth-form-wrapper/auth-form-wrapper';
 import { AuthGoogle } from '../auth-google/auth-google';
+import { formValidationErrors } from '../../../../shared/libs/formValidationErrors';
 
 @Component({
   selector: 'app-login-form',
@@ -47,6 +48,7 @@ import { AuthGoogle } from '../auth-google/auth-google';
   templateUrl: './login-form.html',
   styleUrl: './login-form.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [formValidationErrors],
 })
 export class LoginForm {
   loginForm = new FormGroup<LoginFormControls>({
