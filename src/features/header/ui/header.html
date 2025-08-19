@@ -1,37 +1,44 @@
-<div>
-    <a routerLink="/">
-        <img
-                alt="waynote - logo"
-                height="33"
-                ngSrc="/logo.png"
-                priority
-                width="147"/>
-    </a>
+<div class="header-background">
+    <div class="app-grid">
+        <div class="header">
+            <a class="header__logo" routerLink="/">
+                <img
+                        alt="waynote - logo"
+                        height="40"
+                        ngSrc="/bike.png"
+                        priority
+                        width="40"/>
 
-    <tui-tabs-with-more
-            [(activeItemIndex)]="activeItemIndex"
-            [underline]="false"
-            class="custom">
-        <button *tuiItem routerLink="/" tuiTab type="button">Главная</button>
-        <button *tuiItem routerLink="/my-routes" tuiTab type="button">
-            Мои маршруты
-        </button>
-        <button *tuiItem routerLink="/settings" tuiTab type="button">
-            Настройки
-        </button>
-    </tui-tabs-with-more>
+                <h5 class="tui-text_h5 logo-title">Waynote</h5>
+            </a>
 
-    <div>
-        @if (isAuth) {
-            {{ user.email }}
+            <nav>
+                <ul class="header__nav">
+                    <li>
+                        <a class="nav-item" routerLink="/">Главная</a>
+                    </li>
+                    <li>
+                        <a class="nav-item" routerLink="/my-routes">Мои маршруты</a>
+                    </li>
+                    <li>
+                        <a class="nav-item" routerLink="/settings">Настройки</a>
+                    </li>
+                </ul>
+            </nav>
 
-            <button (click)="logout()">выйти</button>
-        } @else {
             <div>
-                <a tuiLink routerLink="/login"> Войти </a>
-                /
-                <a tuiLink routerLink="/register"> Регистрация </a>
+                @if (isAuth) {
+                    {{ user.displayName }}
+
+                    <button (click)="logout()">выйти</button>
+                } @else {
+                    <div class="header__auth">
+                        <a tuiLink routerLink="/login"> Войти </a>
+                        <span class="no-select">|</span>
+                        <a tuiLink routerLink="/register"> Регистрация </a>
+                    </div>
+                }
             </div>
-        }
+        </div>
     </div>
 </div>

@@ -29,6 +29,7 @@
     "@taiga-ui/icons": "^4.49.0",
     "@taiga-ui/kit": "^4.49.0",
     "@taiga-ui/layout": "^4.49.0",
+    "@taiga-ui/styles": "^4.50.0",
     "@we-gold/gpxjs": "^1.1.0",
     "angular-yandex-maps-v3": "^20.0.0",
     "firebase": "^12.1.0",

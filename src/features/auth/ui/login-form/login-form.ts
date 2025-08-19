@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import {
   TuiButton,
   TuiError,
+  TuiIcon,
   TuiLabel,
   TuiTextfieldComponent,
   TuiTextfieldDirective,
+  TuiTextfieldOptionsDirective,
   TuiTitle,
 } from '@taiga-ui/core';
 import { TuiForm, TuiHeader } from '@taiga-ui/layout';
@@ -15,13 +17,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TuiFieldErrorPipe } from '@taiga-ui/kit';
+import { TuiFieldErrorPipe, TuiPassword } from '@taiga-ui/kit';
 import { LoginFormControls } from '../../model/loginForm';
 import { UserService } from '../../../../entities/user/api/user-service';
 import { passwordValidationRegx } from '../../../../shared/const/validations';
-import { AuthService } from '../../../../entities/user/state/auth-service';
-import { Router } from '@angular/router';
-import { googleAuthHandler } from '../../libs/auth';
+import { AuthFormWrapper } from '../../../../shared/ui/auth-form-wrapper/auth-form-wrapper';
+import { AuthGoogle } from '../auth-google/auth-google';
 
 @Component({
   selector: 'app-login-form',
@@ -37,6 +38,11 @@ import { googleAuthHandler } from '../../libs/auth';
     TuiError,
     TuiTextfieldDirective,
     TuiFieldErrorPipe,
+    TuiIcon,
+    TuiPassword,
+    AuthFormWrapper,
+    TuiTextfieldOptionsDirective,
+    AuthGoogle,
   ],
   templateUrl: './login-form.html',
   styleUrl: './login-form.less',
@@ -61,11 +67,7 @@ export class LoginForm {
     }),
   });
 
-  constructor(
-    private userService: UserService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private userService: UserService) {}
 
   login() {
     if (!this.loginForm.valid) {
@@ -77,9 +79,5 @@ export class LoginForm {
     if (email && password) {
       this.userService.login(email, password).then();
     }
-  }
-
-  googleAuth() {
-    googleAuthHandler.call(this);
   }
 }

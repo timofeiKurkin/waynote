@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@taiga-ui/styles/taiga-ui-global";
+
+button:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: minmax(250px, 1640px);
+  justify-content: center;
+}
+
+.no-select {
+  user-select: none;
+}
+
+.form {
+  min-width: 20rem;
+  max-width: 35rem;
+}

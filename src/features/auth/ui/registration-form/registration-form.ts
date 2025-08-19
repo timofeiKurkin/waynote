@@ -9,19 +9,20 @@ import {
 import {
   TuiButton,
   TuiError,
+  TuiIcon,
   TuiLabel,
   TuiTextfieldComponent,
   TuiTextfieldDirective,
+  TuiTextfieldOptionsDirective,
   TuiTitle,
 } from '@taiga-ui/core';
-import { TuiCheckbox, TuiFieldErrorPipe } from '@taiga-ui/kit';
+import { TuiCheckbox, TuiFieldErrorPipe, TuiPassword } from '@taiga-ui/kit';
 import { TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { RegistrationFormControls } from '../../model/loginForm';
 import { passwordValidationRegx } from '../../../../shared/const/validations';
 import { UserService } from '../../../../entities/user/api/user-service';
-import { AuthService } from '../../../../entities/user/state/auth-service';
-import { Router } from '@angular/router';
-import { googleAuthHandler } from '../../libs/auth';
+import { AuthFormWrapper } from '../../../../shared/ui/auth-form-wrapper/auth-form-wrapper';
+import { AuthGoogle } from '../auth-google/auth-google';
 
 @Component({
   selector: 'app-registration-form',
@@ -38,6 +39,11 @@ import { googleAuthHandler } from '../../libs/auth';
     TuiTextfieldComponent,
     TuiTextfieldDirective,
     TuiTitle,
+    AuthFormWrapper,
+    TuiPassword,
+    TuiIcon,
+    TuiTextfieldOptionsDirective,
+    AuthGoogle,
   ],
   templateUrl: './registration-form.html',
   styleUrl: './registration-form.less',
@@ -45,6 +51,13 @@ import { googleAuthHandler } from '../../libs/auth';
 })
 export class RegistrationForm {
   registrationForm = new FormGroup<RegistrationFormControls>({
+    name: new FormControl(null, {
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ],
+    }),
     email: new FormControl(null, {
       validators: [
         Validators.email,
@@ -63,25 +76,17 @@ export class RegistrationForm {
     policy: new FormControl(false, [Validators.required]),
   });
 
-  constructor(
-    private userService: UserService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private userService: UserService) {}
 
   registration() {
     if (!this.registrationForm.valid) {
       this.registrationForm.markAllAsDirty();
     }
 
-    const { email, policy, password } = this.registrationForm.value;
+    const { name, email, policy, password } = this.registrationForm.value;
 
-    if (email && password && policy) {
-      this.userService.register(email, password).then();
+    if (name && email && password && policy) {
+      this.userService.register(name, email, password).then();
     }
-  }
-
-  googleAuth() {
-    googleAuthHandler.call(this);
   }
 }

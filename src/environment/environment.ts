@@ -1,8 +1,10 @@
 import { FirebaseOptions } from 'firebase/app';
+import { YConfig } from 'angular-yandex-maps-v3';
 
 interface Environment {
   production: boolean;
   firebaseConfig: FirebaseOptions;
+  YConfig: YConfig;
 }
 
 export const environment: Environment = {
@@ -17,5 +19,9 @@ export const environment: Environment = {
     messagingSenderId: 'FIREBASE_MESSAGING_SENDER_ID',
     appId: 'FIREBASE_APP_ID',
     measurementId: 'FIREBASE_MEASUREMENT_ID',
+  },
+  YConfig: {
+    apikey: 'YMAP_API_KEY',
+    lang: 'ru_RU',
   },
 };

@@ -1,0 +1,44 @@
+.header-background {
+  background-color: var(--tui-background-base);
+  border-bottom: 2px solid var(--tui-border-normal);
+  box-shadow: var(--tui-shadow-small);
+  margin-bottom: 60px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 74px;
+
+    &__logo {
+      display: flex;
+      column-gap: 14px;
+      align-items: center;
+      padding: 5px 10px;
+
+      .logo-title {
+        margin: 0;
+      }
+    }
+
+    &__nav {
+      display: flex;
+      align-items: center;
+      column-gap: 100px;
+
+      .nav-item {
+        font: var(--tui-font-text-l);
+      }
+    }
+
+    &__auth {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+
+      a {
+        font: var(--tui-font-text-m)
+      }
+    }
+  }
+}

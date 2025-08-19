@@ -6,5 +6,6 @@ export interface LoginFormControls {
 }
 
 export interface RegistrationFormControls extends LoginFormControls {
+  name: FormControl<string | null>;
   policy: FormControl<boolean>;
 }

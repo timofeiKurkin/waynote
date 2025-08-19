@@ -9,14 +9,11 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { provideYConfig, YConfig } from 'angular-yandex-maps-v3';
-// import { firebaseAuth } from '../shared/api/firebase/firebase';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { provideYConfig } from 'angular-yandex-maps-v3';
+import { onAuthStateChanged } from 'firebase/auth';
 import { AuthService } from '../entities/user/state/auth-service';
-
-const config: YConfig = {
-  apikey: 'YMAP_API_KEY',
-};
+import { firebaseAuth } from '../shared/api/firebase/firebase';
+import { environment } from '../environment/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,17 +21,29 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideAppInitializer(() => {
+    provideAppInitializer(async () => {
       const authService = inject(AuthService);
 
-      onAuthStateChanged(getAuth(), user => {
+      onAuthStateChanged(firebaseAuth, user => {
         if (user) {
           authService.setUser(user);
           authService.setIsAuth(true);
         }
       });
+
+      // getRedirectResult(firebaseAuth)
+      //   .then(res => {
+      //     console.log(res);
+      //     if (res) {
+      //       authService.setUser(res.user);
+      //       authService.setIsAuth(!!res.user);
+      //     }
+      //   })
+      //   .catch(error => {
+      //     console.log('Ошибка при авторизации через Google', error);
+      //   });
     }),
-    provideYConfig(config),
+    provideYConfig(environment.YConfig),
     provideEventPlugins(),
   ],
 };

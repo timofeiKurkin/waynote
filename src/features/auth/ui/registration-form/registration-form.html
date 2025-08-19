@@ -1,79 +1,79 @@
-<form
-        (submit)="registration()"
-        [formGroup]="registrationForm"
-        [style.max-width.rem]="35"
-        tuiForm="l"
->
-    <header tuiHeader>
-        <h3 tuiTitle>
-            Создать новый аккаунт
-            <span tuiSubtitle>Найди свой маршрут в WAYNOTE</span>
-        </h3>
-    </header>
+<app-auth-form-wrapper>
+    <form
+            (submit)="registration()"
+            [formGroup]="registrationForm"
+            class="form"
+            form
+            tuiForm="l"
+    >
+        <header tuiHeader>
+            <h3 tuiTitle>
+                Создать новый аккаунт
+                <span tuiSubtitle>Найди свой маршрут в WAYNOTE</span>
+            </h3>
+        </header>
 
-    <tui-textfield>
-        <label for="email" tuiLabel>Email</label>
-        <input
-                formControlName="email"
-                id="email"
-                placeholder="Email"
-                tuiTextfield
+        <tui-textfield>
+            <label for="register-name" tuiLabel>Ваше имя</label>
+            <input formControlName="name"
+                   id="register-name"
+                   placeholder="Имя"
+                   tuiTextfield
+            />
+        </tui-textfield>
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="name"
         />
-    </tui-textfield>
 
-    <tui-error
-            [error]="[] | tuiFieldError | async"
-            formControlName="email"
-    />
-
-
-    <tui-textfield>
-        <label for="password" tuiLabel>Пароль</label>
-        <input
-                formControlName="password"
-                id="password"
-                tuiTextfield
-                type="password"
+        <tui-textfield [tuiTextfieldCleaner]="false">
+            <label for="register-email" tuiLabel>Email</label>
+            <input formControlName="email"
+                   id="register-email"
+                   placeholder="Email"
+                   tuiTextfield
+            />
+        </tui-textfield>
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="email"
         />
-        <!--        <tui-icon tuiPassword/>-->
-    </tui-textfield>
-    <tui-error
-            [error]="[] | tuiFieldError | async"
-            formControlName="password"
-    />
 
 
-    <label tuiLabel>
-        <input
-                formControlName="policy"
-                tuiCheckbox
-                type="checkbox"
+        <tui-textfield [tuiTextfieldCleaner]="false">
+            <label for="register-password" tuiLabel>Пароль</label>
+            <input formControlName="password"
+                   id="register-password"
+                   tuiTextfield
+                   type="password"
+            />
+            <tui-icon tuiPassword/>
+        </tui-textfield>
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="password"
         />
-        Мы будем хранить ваш email
-    </label>
 
-    <tui-error
-            [error]="[] | tuiFieldError | async"
-            formControlName="policy"
-    />
 
-    <footer>
-        <button
-                tuiButton
-                type="submit"
-        >
-            Войти
-        </button>
-    </footer>
-</form>
+        <label tuiLabel>
+            <input formControlName="policy"
+                   tuiCheckbox
+                   type="checkbox"
+            />
+            Мы будем хранить ваш email
+        </label>
 
-<hr>
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="policy"
+        />
 
-<button
-        (click)="googleAuth()"
-        appearance="primary"
-        tuiButton
-        type="button"
->
-    Регистрация через Google
-</button>
+        <footer>
+            <button
+                    tuiButton
+                    type="submit"
+            >
+                Регистрация
+            </button>
+        </footer>
+    </form>
+
+    <app-auth-google ways-to-auth></app-auth-google>
+</app-auth-form-wrapper>
+

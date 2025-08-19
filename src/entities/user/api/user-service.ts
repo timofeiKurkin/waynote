@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
   UserCredential,
 } from 'firebase/auth';
 import { firebaseAuth } from '../../../shared/api/firebase/firebase';
@@ -11,8 +12,21 @@ import { firebaseAuth } from '../../../shared/api/firebase/firebase';
   providedIn: 'root',
 })
 export class UserService {
-  register(email: string, password: string): Promise<UserCredential> {
-    return createUserWithEmailAndPassword(firebaseAuth, email, password);
+  async register(
+    name: string,
+    email: string,
+    password: string
+  ): Promise<UserCredential> {
+    const userCredential = await createUserWithEmailAndPassword(
+      firebaseAuth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    updateProfile(user, {
+      displayName: name,
+    }).then();
+    return userCredential;
   }
 
   login(email: string, password: string): Promise<UserCredential> {

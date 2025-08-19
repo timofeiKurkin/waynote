@@ -8,7 +8,5 @@ export const firebaseApp = initializeApp(environment.firebaseConfig);
 // export const analytics = getAnalytics(firebaseApp);
 export const firestore = getFirestore(firebaseApp);
 export const firebaseAuth = getAuth(firebaseApp);
+firebaseAuth.useDeviceLanguage();
 export const googleAuthProvider = new GoogleAuthProvider();
-googleAuthProvider.setCustomParameters({
-  login_hint: 'user@example.com',
-});
