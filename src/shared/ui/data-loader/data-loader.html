@@ -1,0 +1,15 @@
+@if (isLoading()) {
+    <tui-loader/>
+} @else if (isError()) {
+    <tui-block-status class="tui-space_vertical-12">
+        <h1 class="tui-text_h1">
+            404
+        </h1>
+
+        <h4>Ошибка!</h4>
+
+        Ошибка при загрузке данных или таких данных пока не существует
+    </tui-block-status>
+} @else {
+    <ng-content></ng-content>
+}

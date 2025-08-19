@@ -4,15 +4,26 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouteService } from '../../entities/route/api/route-service';
 import { RoutePreview, WithID } from '../../entities/route/models/interface';
 import { ParsedGPXInputs } from '@we-gold/gpxjs';
 import { Ymap } from '../../widgets/ymap/ui/ymap';
+import { DataLoader } from '../../shared/ui/data-loader/data-loader';
+import { ErrorService } from '../../shared/libs/error-service/error-service';
+import { RouterLink } from '@angular/router';
+import { TuiBlockStatusComponent } from '@taiga-ui/layout';
 
 @Component({
   selector: 'app-routes-list',
-  imports: [CommonModule, Ymap],
+  imports: [
+    CommonModule,
+    Ymap,
+    DataLoader,
+    RouterLink,
+    TuiBlockStatusComponent,
+    NgOptimizedImage,
+  ],
   templateUrl: './routes-list.html',
   styleUrl: './routes-list.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,34 +31,47 @@ import { Ymap } from '../../widgets/ymap/ui/ymap';
 export class RoutesList implements OnInit {
   routes = signal<(RoutePreview & WithID)[] | null>(null);
 
-  constructor(private routeService: RouteService) {}
+  constructor(
+    private routeService: RouteService,
+    private errorService: ErrorService
+  ) {}
 
-  async ngOnInit() {
-    const snapshot = []; // await this.routeService.getRoutes();
-    const routes: (RoutePreview & WithID)[] = [];
+  get isError() {
+    return this.errorService.isError();
+  }
 
-    snapshot.forEach(route => {
-      const data = route.data();
+  ngOnInit() {
+    this.routeService
+      .getRoutes()
+      .then(snapshot => {
+        const routes: (RoutePreview & WithID)[] = [];
 
-      const gpx: ParsedGPXInputs = {
-        xml: new Document(),
-        routes: data['routes'],
-        tracks: data['tracks'],
-        waypoints: data['waypoints'],
-        metadata: data['metadata'],
-      };
+        snapshot.forEach(route => {
+          const data = route.data();
 
-      routes.push({
-        id: route.id,
-        gpx,
-        title: data['title'],
-        description: data['description'],
-        city: data['city'],
-        createdAt: data['createdAt'],
-        year: data['year'],
+          const gpx: ParsedGPXInputs = {
+            xml: new Document(),
+            routes: data['routes'],
+            tracks: data['tracks'],
+            waypoints: data['waypoints'],
+            metadata: data['metadata'],
+          };
+
+          routes.push({
+            id: route.id,
+            gpx,
+            title: data['title'],
+            description: data['description'],
+            city: data['city'],
+            createdAt: data['createdAt'],
+            year: data['year'],
+          });
+        });
+
+        this.routes.set(routes);
+      })
+      .catch(error => {
+        this.errorService.handleError(error);
       });
-    });
-
-    this.routes.set(routes);
   }
 }
