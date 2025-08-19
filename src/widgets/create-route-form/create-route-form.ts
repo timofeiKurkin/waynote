@@ -22,6 +22,7 @@ import {
   TuiLabel,
   TuiTextfieldComponent,
   TuiTextfieldDirective,
+  TuiTextfieldDropdownDirective,
   TuiTitle,
 } from '@taiga-ui/core';
 import {
@@ -70,6 +71,7 @@ import { formValidationErrors } from '../../shared/libs/formValidationErrors';
     TuiTextfieldDirective,
     TuiTitle,
     Ymap,
+    TuiTextfieldDropdownDirective,
   ],
   templateUrl: './create-route-form.html',
   styleUrl: './create-route-form.less',

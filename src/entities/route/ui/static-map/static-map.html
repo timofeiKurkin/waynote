@@ -1,0 +1,5 @@
+<div [style.height]="mapSize()" [style.width]="mapSize()" class="map-preview">
+    <app-data-loader [isError]="isError" [isLoading]="!isError && staticMap() === null">
+        <img [height]="mapSize()" [ngSrc]="staticMap()" [width]="mapSize()" alt="Static map">
+    </app-data-loader>
+</div>

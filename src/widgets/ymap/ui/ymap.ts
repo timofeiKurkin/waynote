@@ -8,7 +8,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { YMapFeatureProps, YMapProps } from 'ymaps3';
 import { ParsedGPX, ParsedGPXInputs } from '@we-gold/gpxjs';
-import { getMaxZoomForBounds, parseTrackPoints } from '../libs/parseGPXFile';
+import { getMaxZoomForBounds, parseTrackPoints } from '../libs/GPXHandlers';
 import {
   YMapComponent,
   YMapDefaultFeaturesLayerDirective,
@@ -56,7 +56,7 @@ export class Ymap implements OnChanges {
       restrictMapArea: bounds,
       zoomRange: { min: minZoom, max: 21 },
       zoomStrategy: 'zoomToCenter',
-      margin: [40, 40, 40, 40],
+      // margin: [40, 40, 40, 40],
     });
     this.featureProps.set({
       id: 'track',

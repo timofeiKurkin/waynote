@@ -14,6 +14,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { AuthService } from '../entities/user/state/auth-service';
 import { firebaseAuth } from '../shared/api/firebase/firebase';
 import { environment } from '../environment/environment';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -44,6 +45,7 @@ export const appConfig: ApplicationConfig = {
       //   });
     }),
     provideYConfig(environment.YConfig),
+    provideHttpClient(),
     provideEventPlugins(),
   ],
 };

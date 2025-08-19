@@ -2,7 +2,6 @@ import { LngLat, LngLatBounds } from 'ymaps3';
 
 export interface TrackPoints {
   yPoints: LngLat[];
-  elevations: number[];
   bounds: LngLatBounds;
   center: LngLat;
 }

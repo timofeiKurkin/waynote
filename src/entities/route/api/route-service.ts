@@ -10,11 +10,17 @@ import {
   where,
 } from 'firebase/firestore';
 import { firestore } from '../../../shared/api/firebase/firebase';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RouteService {
+  private geoapifyStaticApi = `https://maps.geoapify.com/v1/staticmap?apiKey=${environment.geoapify}`;
+
+  constructor(private http: HttpClient) {}
+
   createRoute(route: IRoute) {
     return addDoc(collection(firestore, 'routes'), route);
   }
@@ -33,5 +39,11 @@ export class RouteService {
 
   getRoutes() {
     return getDocs(collection(firestore, 'routes'));
+  }
+
+  getStaticMapOfRoute(map: Record<string, number | string | object>) {
+    return this.http.post(this.geoapifyStaticApi, map, {
+      responseType: 'blob',
+    });
   }
 }

@@ -5,6 +5,7 @@ interface Environment {
   production: boolean;
   firebaseConfig: FirebaseOptions;
   YConfig: YConfig;
+  geoapify: string;
 }
 
 export const environment: Environment = {
@@ -24,4 +25,5 @@ export const environment: Environment = {
     apikey: 'YMAP_API_KEY',
     lang: 'ru_RU',
   },
+  geoapify: 'GEOAPIFY_API_KEY',
 };

@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { DataLoader } from '../../../../shared/ui/data-loader/data-loader';
 import { TuiBlockStatusComponent } from '@taiga-ui/layout';
-import { Ymap } from '../../../../widgets/ymap/ui/ymap';
 import { RoutePreview } from '../../models/interface';
 import { RouterLink } from '@angular/router';
 import { TuiAppearance, TuiButton } from '@taiga-ui/core';
+import { StaticMap } from '../static-map/static-map';
 
 @Component({
   selector: 'app-route-list',
@@ -14,10 +14,10 @@ import { TuiAppearance, TuiButton } from '@taiga-ui/core';
     DataLoader,
     NgOptimizedImage,
     TuiBlockStatusComponent,
-    Ymap,
     RouterLink,
     TuiAppearance,
     TuiButton,
+    StaticMap,
   ],
   templateUrl: './route-list.html',
   styleUrl: './route-list.less',
