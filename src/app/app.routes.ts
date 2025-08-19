@@ -1,25 +1,19 @@
 import { Route } from '@angular/router';
 import { MainPage } from '../pages/main-page/main-page';
 import { NotFoundPage } from '../pages/not-found-page/not-found-page';
+import { unAuthGuard } from '../shared/guards/un-auth-guard/un-auth-guard';
 
 export const appRoutes: Route[] = [
   {
-    path: 'settings',
-    // canMatch: [authGuard],
-    loadComponent: () =>
-      import('../pages/settings-page/settings-page').then(m => m.SettingsPage),
-    title: 'Настройки',
-  },
-  {
     path: 'login',
-    // canMatch: [unAuthGuard],
+    canMatch: [unAuthGuard],
     loadComponent: () =>
       import('../pages/login-page/login-page').then(m => m.LoginPage),
     title: 'Аутентификация',
   },
   {
     path: 'register',
-    // canMatch: [unAuthGuard],
+    canMatch: [unAuthGuard],
     loadComponent: () =>
       import('../pages/registration-page/registration-page').then(
         m => m.RegistrationPage

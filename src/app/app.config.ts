@@ -22,14 +22,17 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideAppInitializer(async () => {
+    provideAppInitializer(() => {
       const authService = inject(AuthService);
 
-      onAuthStateChanged(firebaseAuth, user => {
-        if (user) {
-          authService.setUser(user);
-          authService.setIsAuth(true);
-        }
+      return new Promise<void>(resolve => {
+        onAuthStateChanged(firebaseAuth, user => {
+          if (user) {
+            authService.setUser(user);
+            authService.setIsAuth(true);
+          }
+          resolve();
+        });
       });
 
       // Авторизация через редирект в google, а потом обратно в приложение.
