@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { IRoute } from '../models/interface';
-import { addDoc, collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { firestore } from '../../../shared/api/firebase/firebase';
 
 @Injectable({
@@ -13,6 +21,14 @@ export class RouteService {
 
   getRoute(routeId: string) {
     return getDoc(doc(firestore, 'routes', routeId));
+  }
+
+  getDocsByOwner(ownerId: string) {
+    const q = query(
+      collection(firestore, 'routes'),
+      where('ownerId', '==', ownerId)
+    );
+    return getDocs(q);
   }
 
   getRoutes() {

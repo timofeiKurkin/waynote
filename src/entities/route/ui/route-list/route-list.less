@@ -1,0 +1,27 @@
+.routes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+
+  .route-item {
+    display: block;
+    width: 400px;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: var(--tui-background-base);
+
+    .route-content {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      padding: 20px;
+
+      h6 {
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

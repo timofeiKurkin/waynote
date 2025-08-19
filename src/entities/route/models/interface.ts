@@ -21,7 +21,11 @@ export interface IRoute {
   waypoints: Waypoint[];
 }
 
-export interface RoutePreview {
+export interface WithID {
+  id: string;
+}
+
+export interface RoutePreview extends WithID {
   title: string;
   city: string;
   year: number;
@@ -29,8 +33,4 @@ export interface RoutePreview {
   createdAt: Date;
 
   gpx: ParsedGPXInputs;
-}
-
-export interface WithID {
-  id: string;
 }

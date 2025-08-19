@@ -1,0 +1,45 @@
+<app-data-loader [isError]="isError()" [isLoading]="!isError() && routes() === null">
+    @if (routes()) {
+        @if (routes().length) {
+            <ul class="routes-list">
+                @for (route of routes(); track route.id) {
+                    <li tuiAppearance="floating" class="route-item">
+                        <app-ymap [mapSize]="400" [GPX]="route.gpx"></app-ymap>
+
+                        <div class="route-content">
+                            <div class="route-location-year">
+                                <span>{{ route.city }}</span>
+                                -
+                                <span>{{ route.year }}</span>
+                            </div>
+
+                            <h6 class="tui-text_h6">{{ route.title }}</h6>
+
+                            <button appearance="primary"
+                                    tuiButton
+                                    type="button"
+                                    [routerLink]="['routes', route.id]"
+                            >
+                                Подробнее о маршруте
+                            </button>
+                        </div>
+                    </li>
+                }
+            </ul>
+        } @else {
+            <tui-block-status class="">
+                <img
+                        alt="not found"
+                        ngSrc="/empty-list.png"
+                        width="500"
+                        height="500"
+                        tuiSlot="top"
+                />
+
+                <h4>Маршруты еще не созданы</h4>
+
+                Мы добавим маршруты как можно скорее!
+            </tui-block-status>
+        }
+    }
+</app-data-loader>

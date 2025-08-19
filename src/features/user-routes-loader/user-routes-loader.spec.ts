@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RoutesList } from './routes-list';
+import { UserRoutesLoader } from './user-routes-loader';
 
-describe('RoutesList', () => {
-  let component: RoutesList;
-  let fixture: ComponentFixture<RoutesList>;
+describe('UserRoutesLoader', () => {
+  let component: UserRoutesLoader;
+  let fixture: ComponentFixture<UserRoutesLoader>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RoutesList],
+      imports: [UserRoutesLoader],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RoutesList);
+    fixture = TestBed.createComponent(UserRoutesLoader);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

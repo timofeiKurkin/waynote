@@ -16,7 +16,7 @@ import {
   TuiInputChipDirective,
   TuiMultiSelectGroupDirective,
 } from '@taiga-ui/kit';
-import { RoutesList } from '../../features/routes-list/routes-list';
+import { RouteListLoader } from '../../features/route-list-loader/route-list-loader';
 
 @Component({
   selector: 'app-main-page',
@@ -34,7 +34,7 @@ import { RoutesList } from '../../features/routes-list/routes-list';
     TuiTextfieldDropdownDirective,
     TuiSelectLike,
     TuiMultiSelectGroupDirective,
-    RoutesList,
+    RouteListLoader,
   ],
   templateUrl: './main-page.html',
   styleUrl: './main-page.less',
