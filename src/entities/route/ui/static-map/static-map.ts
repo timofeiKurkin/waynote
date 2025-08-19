@@ -8,13 +8,11 @@ import {
 import { CommonModule } from '@angular/common';
 import { ParsedGPX, ParsedGPXInputs } from '@we-gold/gpxjs';
 import { RouteService } from '../../api/route-service';
-import {
-  getMaxZoomForBounds,
-  parseTracksForStatic,
-} from '../../../../widgets/ymap/libs/GPXHandlers';
 import { catchError, EMPTY, map, take } from 'rxjs';
 import { ErrorService } from '../../../../shared/libs/error-service/error-service';
 import { DataLoader } from '../../../../shared/ui/data-loader/data-loader';
+import { parseTracksForStatic } from '../../../../widgets/ymap/libs/parseTracksForStatic';
+import { getMaxZoomForBounds } from '../../../../widgets/ymap/libs/math';
 
 @Component({
   selector: 'app-static-map',

@@ -8,13 +8,14 @@ import {
 import { CommonModule } from '@angular/common';
 import { YMapFeatureProps, YMapProps } from 'ymaps3';
 import { ParsedGPX, ParsedGPXInputs } from '@we-gold/gpxjs';
-import { getMaxZoomForBounds, parseTrackPoints } from '../libs/GPXHandlers';
+import { parseTrackPoints } from '../libs/parseTrackPoints';
 import {
   YMapComponent,
   YMapDefaultFeaturesLayerDirective,
   YMapDefaultSchemeLayerDirective,
   YMapFeatureDirective,
 } from 'angular-yandex-maps-v3';
+import { getMaxZoomForBounds } from '../libs/math';
 
 @Component({
   selector: 'app-ymap',

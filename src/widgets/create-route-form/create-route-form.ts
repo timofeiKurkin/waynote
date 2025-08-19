@@ -142,7 +142,7 @@ export class CreateRouteForm {
   createRoute() {
     this.formIsSending.set(true);
 
-    if (this.describeRouteForm.valid) {
+    if (!this.describeRouteForm.valid) {
       this.describeRouteForm.markAllAsTouched();
       return;
     }
@@ -185,10 +185,10 @@ export class CreateRouteForm {
   }
 
   protected next(): void {
-    // if (!this.GPX()) {
-    //   this.dropZoneComponent.dropZoneControl.markAllAsTouched();
-    //   return;
-    // }
+    if (!this.paredGPX()) {
+      this.dropZoneComponent.dropZoneControl.markAllAsTouched();
+      return;
+    }
 
     this.formStepIndex.update(index => index + 1);
   }

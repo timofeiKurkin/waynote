@@ -35,7 +35,7 @@
     "angular-yandex-maps-v3": "^20.0.0",
     "firebase": "^12.1.0",
     "rxjs": "~7.8.0",
-    "simplify-js": "^1.2.4",
+    "simplify-ts": "^1.0.2",
     "uuid": "^11.1.0",
     "zone.js": "~0.15.0"
   },
