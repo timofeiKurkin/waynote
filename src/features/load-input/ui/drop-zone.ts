@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  TuiFieldErrorPipe,
   TuiFile,
   TuiFileLike,
   TuiFileRejectedPipe,
@@ -19,11 +20,8 @@ import {
   Subject,
   switchMap,
 } from 'rxjs';
-import {
-  readGPXFile,
-  stringToGPX,
-} from '../../../widgets/ymap/libs/stringToGPX';
-import { ParsedGPX } from '@we-gold/gpxjs';
+import { stringToGPX } from '../../../widgets/ymap/libs/stringToGPX';
+import { TuiError } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-drop-zone',
@@ -35,19 +33,20 @@ import { ParsedGPX } from '@we-gold/gpxjs';
     TuiFileRejectedPipe,
     TuiInputFiles,
     ReactiveFormsModule,
+    TuiError,
+    TuiFieldErrorPipe,
   ],
   templateUrl: './drop-zone.html',
   styleUrl: './drop-zone.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropZone {
-  loadGPX = output<ParsedGPX>();
+  loadGPX = output<TuiFileLike>();
 
-  protected readonly dropZoneControl = new FormControl<TuiFileLike | null>(
+  readonly dropZoneControl = new FormControl<TuiFileLike | null>(
     null,
     Validators.required
   );
-
   protected readonly failedFile$ = new Subject<TuiFileLike | null>();
   protected readonly loadingFile$ = new Subject<TuiFileLike | null>();
   protected readonly loadedFile$ = this.dropZoneControl.valueChanges.pipe(
@@ -56,7 +55,7 @@ export class DropZone {
     }),
     map(file => {
       this.loadGPX.emit(file);
-      return this.dropZoneControl.value;
+      return file;
     })
   );
 
@@ -66,7 +65,7 @@ export class DropZone {
 
   protected processFile(
     file: TuiFileLike | null
-  ): Observable<ParsedGPX | null> {
+  ): Observable<TuiFileLike | null> {
     this.failedFile$.next(null);
 
     if (this.dropZoneControl.invalid || !file) {
@@ -76,15 +75,14 @@ export class DropZone {
     this.loadingFile$.next(file);
 
     return of(file).pipe(
-      switchMap(file => {
+      map(file => {
         if (!file.name.endsWith('.gpx')) {
           this.failedFile$.next(file);
           return;
         }
 
-        return readGPXFile(file as File);
+        return file;
       }),
-      map(stringToGPX),
       catchError(() => {
         this.failedFile$.next(file);
         return EMPTY;

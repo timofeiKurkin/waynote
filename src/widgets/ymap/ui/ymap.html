@@ -1,5 +1,5 @@
 @if (mapProps() && featureProps()) {
-    <y-map [props]="mapProps()" class="container" [style.width]="mapSize() + 'px'" [style.height]="mapSize() + 'px'">
+    <y-map [props]="mapProps()" class="block" [style.width]="mapSize() + 'px'" [style.height]="mapSize() + 'px'">
         <y-map-default-scheme-layer/>
         <y-map-default-features-layer/>
 
@@ -10,5 +10,7 @@
         }
     </y-map>
 } @else {
-    <div>Загрузите карту</div>
+    <div [style.width]="mapSize() + 'px'" [style.height]="mapSize() + 'px'" class="no-map center">
+        <h5 class="tui-text_h5">Вы еще не загрузили карту</h5>
+    </div>
 }

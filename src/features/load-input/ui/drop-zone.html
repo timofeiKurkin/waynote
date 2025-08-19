@@ -7,6 +7,9 @@
             />
         </label>
 
+        <tui-error [error]="[] | tuiFieldError | async"
+                   [formControl]="dropZoneControl"
+        />
     }
 
     <tui-files class="tui-space_top-1">
