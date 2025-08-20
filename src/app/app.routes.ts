@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 import { MainPage } from '../pages/main-page/main-page';
 import { NotFoundPage } from '../pages/not-found-page/not-found-page';
 import { unAuthGuard } from '../shared/guards/un-auth-guard/un-auth-guard';
+import { authGuard } from '../shared/guards/auth-guard/auth-guard';
 
 export const appRoutes: Route[] = [
   {
@@ -31,6 +32,7 @@ export const appRoutes: Route[] = [
       import('../pages/my-routes-page/my-routes-page').then(
         m => m.MyRoutesPage
       ),
+    canMatch: [authGuard],
     title: 'Мои маршруты',
   },
   {
@@ -44,6 +46,7 @@ export const appRoutes: Route[] = [
       import('../pages/create-route-page/create-route-page').then(
         m => m.CreateRoutePage
       ),
+    canMatch: [authGuard],
     title: 'Создать новый маршрут',
   },
   {

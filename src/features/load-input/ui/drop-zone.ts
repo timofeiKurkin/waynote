@@ -20,7 +20,7 @@ import {
   Subject,
   switchMap,
 } from 'rxjs';
-import { TuiError } from '@taiga-ui/core';
+import { TuiError, TuiLink } from '@taiga-ui/core';
 import { formValidationErrors } from '../../../shared/libs/formValidationErrors';
 
 @Component({
@@ -35,6 +35,7 @@ import { formValidationErrors } from '../../../shared/libs/formValidationErrors'
     ReactiveFormsModule,
     TuiError,
     TuiFieldErrorPipe,
+    TuiLink,
   ],
   templateUrl: './drop-zone.html',
   styleUrl: './drop-zone.less',
