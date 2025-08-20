@@ -24,6 +24,8 @@ import { UserService } from '../../../../entities/user/api/user-service';
 import { AuthFormWrapper } from '../../../../shared/ui/auth-form-wrapper/auth-form-wrapper';
 import { AuthGoogle } from '../auth-google/auth-google';
 import { formValidationErrors } from '../../../../shared/libs/formValidationErrors';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../entities/user/state/auth-service';
 
 @Component({
   selector: 'app-registration-form',
@@ -75,20 +77,32 @@ export class RegistrationForm {
         Validators.pattern(passwordValidationRegx),
       ],
     }),
-    policy: new FormControl(false, [Validators.required]),
+    policy: new FormControl(false, [Validators.requiredTrue]),
   });
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   registration() {
     if (!this.registrationForm.valid) {
-      this.registrationForm.markAllAsDirty();
+      this.registrationForm.markAllAsTouched();
+      return;
     }
 
     const { name, email, policy, password } = this.registrationForm.value;
 
     if (name && email && password && policy) {
-      this.userService.register(name, email, password).then();
+      this.userService.register(name, email, password).then(user => {
+        this.authService.setUser({
+          ...user.user,
+          displayName: name,
+        });
+        this.authService.setIsAuth(true);
+        this.router.navigate(['/']).then();
+      });
     }
   }
 }

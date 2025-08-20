@@ -24,6 +24,7 @@ import { passwordValidationRegx } from '../../../../shared/const/validations';
 import { AuthFormWrapper } from '../../../../shared/ui/auth-form-wrapper/auth-form-wrapper';
 import { AuthGoogle } from '../auth-google/auth-google';
 import { formValidationErrors } from '../../../../shared/libs/formValidationErrors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -69,17 +70,20 @@ export class LoginForm {
     }),
   });
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   login() {
     if (!this.loginForm.valid) {
-      this.loginForm.markAllAsDirty();
+      this.loginForm.markAllAsTouched();
+      return;
     }
 
     const { email, password } = this.loginForm.value;
 
     if (email && password) {
-      this.userService.login(email, password).then();
+      this.userService.login(email, password).then(() => {
+        this.router.navigate(['/']).then();
+      });
     }
   }
 }

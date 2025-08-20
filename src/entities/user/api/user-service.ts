@@ -22,10 +22,11 @@ export class UserService {
       email,
       password
     );
-    const user = userCredential.user;
-    updateProfile(user, {
+
+    updateProfile(userCredential.user, {
       displayName: name,
     }).then();
+
     return userCredential;
   }
 
