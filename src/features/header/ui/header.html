@@ -20,11 +20,22 @@
                     <li>
                         <a class="nav-item" routerLink="/my-routes">Мои маршруты</a>
                     </li>
-                    <li>
-                        <a class="nav-item" routerLink="/settings">Настройки</a>
-                    </li>
                 </ul>
             </nav>
+
+            <button
+                    appearance="primary"
+                    routerLink="/create-route"
+                    size="m"
+                    tuiButton
+                    type="button"
+            >
+                <tui-icon
+                        [style.height.rem]="1"
+                        icon="@tui.plus"
+                />
+                Создать маршрут
+            </button>
 
             <div>
                 @if (isAuth) {
