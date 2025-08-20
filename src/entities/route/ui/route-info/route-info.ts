@@ -105,7 +105,7 @@ export class RouteInfo implements OnInit {
           a.href = url;
           a.download = route.title + '.gpx';
           a.click();
-          window.URL.revokeObjectURL(url);
+          URL.revokeObjectURL(url);
         }),
         take(1),
         finalize(() => this.isDownloading.set(false))

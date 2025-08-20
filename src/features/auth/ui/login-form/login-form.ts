@@ -5,6 +5,7 @@ import {
   TuiError,
   TuiIcon,
   TuiLabel,
+  TuiLink,
   TuiTextfieldComponent,
   TuiTextfieldDirective,
   TuiTextfieldOptionsDirective,
@@ -24,7 +25,7 @@ import { passwordValidationRegx } from '../../../../shared/const/validations';
 import { AuthFormWrapper } from '../../../../shared/ui/auth-form-wrapper/auth-form-wrapper';
 import { AuthGoogle } from '../auth-google/auth-google';
 import { formValidationErrors } from '../../../../shared/libs/formValidationErrors';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -45,6 +46,8 @@ import { Router } from '@angular/router';
     AuthFormWrapper,
     TuiTextfieldOptionsDirective,
     AuthGoogle,
+    TuiLink,
+    RouterLink,
   ],
   templateUrl: './login-form.html',
   styleUrl: './login-form.less',

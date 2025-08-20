@@ -22,11 +22,6 @@ export const appRoutes: Route[] = [
     title: 'Регистрация',
   },
   {
-    path: 'routes/:id',
-    loadComponent: () =>
-      import('../pages/route-page/route-page').then(m => m.RoutePage),
-  },
-  {
     path: 'my-routes',
     loadComponent: () =>
       import('../pages/my-routes-page/my-routes-page').then(
@@ -48,6 +43,11 @@ export const appRoutes: Route[] = [
       ),
     canMatch: [authGuard],
     title: 'Создать новый маршрут',
+  },
+  {
+    path: ':id',
+    loadComponent: () =>
+      import('../pages/route-page/route-page').then(m => m.RoutePage),
   },
   {
     path: '',

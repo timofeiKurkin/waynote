@@ -75,6 +75,7 @@
     </div>
 </div>
 
+
 <nav class="tabs" tuiTabBar>
     @for (item of items; track item.text) {
         <button tuiTabBarItem
@@ -83,6 +84,24 @@
                 [routerLink]="item.href"
         >
             {{ item.text }}
+        </button>
+    }
+
+    @if (isAuth) {
+        <button tuiTabBarItem
+                type="button"
+                icon="@tui.log-out"
+                (click)="logout()"
+        >
+            Выйти
+        </button>
+    } @else {
+        <button tuiTabBarItem
+                type="button"
+                icon="@tui.log-in"
+                routerLink="/login"
+        >
+            Войти в аккаунт
         </button>
     }
 </nav>

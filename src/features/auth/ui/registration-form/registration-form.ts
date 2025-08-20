@@ -11,6 +11,7 @@ import {
   TuiError,
   TuiIcon,
   TuiLabel,
+  TuiLink,
   TuiTextfieldComponent,
   TuiTextfieldDirective,
   TuiTextfieldOptionsDirective,
@@ -24,7 +25,7 @@ import { UserService } from '../../../../entities/user/api/user-service';
 import { AuthFormWrapper } from '../../../../shared/ui/auth-form-wrapper/auth-form-wrapper';
 import { AuthGoogle } from '../auth-google/auth-google';
 import { formValidationErrors } from '../../../../shared/libs/formValidationErrors';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../entities/user/state/auth-service';
 
 @Component({
@@ -47,6 +48,8 @@ import { AuthService } from '../../../../entities/user/state/auth-service';
     TuiIcon,
     TuiTextfieldOptionsDirective,
     AuthGoogle,
+    RouterLink,
+    TuiLink,
   ],
   templateUrl: './registration-form.html',
   styleUrl: './registration-form.less',

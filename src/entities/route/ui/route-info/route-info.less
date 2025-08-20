@@ -1,5 +1,30 @@
 .route-info-wrapper {
   display: flex;
-  column-gap: 60px;
+  gap: 60px;
   justify-content: center;
+
+  @media screen and (max-width: 1023px) {
+    flex-direction: column;
+  }
+
+  .route-city-year {
+    display: flex;
+    column-gap: 10px;
+  }
+
+  .map-wrapper {
+    border-radius: var(--tui-radius-l);
+    overflow: hidden;
+    box-shadow: var(--tui-shadow-small);
+  }
+
+  .route-description {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+
+    span {
+      color: var(--tui-text-secondary);
+    }
+  }
 }

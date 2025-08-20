@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../entities/user/state/auth-service';
 import {
   TuiButton,
@@ -52,8 +52,7 @@ export class Header {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService,
-    private router: Router
+    private userService: UserService
   ) {}
 
   get user() {
