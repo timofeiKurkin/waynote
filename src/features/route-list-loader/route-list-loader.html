@@ -1,30 +1,32 @@
-<div class="list-header">
-    <form [formGroup]="filterForm" class="filters-form">
-        <tui-textfield tuiChevron>
-            <input #cityInput
-                   formControlName="cityFiltering"
-                   placeholder="Фильтр по городу"
-                   tuiComboBox
-            />
+<div class="route-list-loader">
+    <div class="list-header">
+        <form [formGroup]="filterForm" class="filters-form">
+            <tui-textfield tuiChevron>
+                <input #cityInput
+                       formControlName="cityFiltering"
+                       placeholder="Фильтр по городу"
+                       tuiComboBox
+                />
 
-            <tui-data-list-wrapper *tuiTextfieldDropdown
-                                   [items]="cities | tuiFilterByInput"
-                                   new
-            />
-        </tui-textfield>
+                <tui-data-list-wrapper *tuiTextfieldDropdown
+                                       [items]="cities | tuiFilterByInput"
+                                       new
+                />
+            </tui-textfield>
 
-        <tui-textfield tuiChevron>
-            <input formControlName="yearFiltering"
-                   placeholder="Фильтр по году"
-                   tuiComboBox
-            />
+            <tui-textfield tuiChevron>
+                <input formControlName="yearFiltering"
+                       placeholder="Фильтр по году"
+                       tuiComboBox
+                />
 
-            <tui-data-list-wrapper *tuiTextfieldDropdown
-                                   [items]="years | tuiFilterByInput"
-                                   new
-            />
-        </tui-textfield>
-    </form>
+                <tui-data-list-wrapper *tuiTextfieldDropdown
+                                       [items]="years | tuiFilterByInput"
+                                       new
+                />
+            </tui-textfield>
+        </form>
+    </div>
+
+    <app-route-list [isError]="isError" [routes]="filteredRoutes()"></app-route-list>
 </div>
-
-<app-route-list [isError]="isError" [routes]="filteredRoutes()"></app-route-list>

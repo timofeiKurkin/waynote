@@ -1,11 +1,28 @@
-.list-header {
+.route-list-loader {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
+  flex-direction: column;
+  row-gap: 40px;
 
-  .filters-form {
-    display: grid;
-    grid-template-columns: 400px 400px;
-    column-gap: 20px;
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+
+
+    .filters-form {
+      width: 100%;
+      display: grid;
+
+      @media screen and (max-width: 1023px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        row-gap: 20px;
+      }
+
+      @media screen and (min-width: 1024px) {
+        grid-template-columns: 400px 400px;
+        column-gap: 20px;
+      }
+    }
   }
 }
+

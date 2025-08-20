@@ -4,7 +4,9 @@
             <ul class="routes-list">
                 @for (route of routes(); track route.id) {
                     <li tuiAppearance="floating" class="route-item">
-                        <app-static-map [mapSize]="400" [GPX]="route.gpx"></app-static-map>
+                        <div class="static-map-wrapper">
+                            <app-static-map [mapSize]="400" [GPX]="route.gpx"></app-static-map>
+                        </div>
 
                         <div class="route-content">
                             <div class="route-location-year">

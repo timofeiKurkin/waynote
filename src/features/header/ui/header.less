@@ -1,44 +1,73 @@
 .header-background {
-  background-color: var(--tui-background-base);
-  border-bottom: 2px solid var(--tui-border-normal);
-  box-shadow: var(--tui-shadow-small);
-  margin-bottom: 60px;
+  display: none;
 
-  .header {
+  @media screen and (min-width: 1024px) {
+    display: block;
+    background-color: var(--tui-background-base);
+    border-bottom: 2px solid var(--tui-border-normal);
+    box-shadow: var(--tui-shadow-small);
+    margin-bottom: 60px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 74px;
+
+      .create-route-auth {
+        display: flex;
+        align-items: center;
+        column-gap: 70px;
+
+        &__auth {
+          display: flex;
+          align-items: center;
+          column-gap: 10px;
+
+          a {
+            font: var(--tui-font-text-m)
+          }
+        }
+      }
+
+      .logo-nav {
+        display: flex;
+        align-items: center;
+        column-gap: 100px;
+
+        .logo {
+          display: flex;
+          column-gap: 14px;
+          align-items: center;
+
+          .logo-title {
+            margin: 0;
+          }
+        }
+
+        .nav {
+          display: flex;
+          align-items: center;
+          column-gap: 100px;
+
+          .nav-item {
+            font: var(--tui-font-text-l);
+          }
+        }
+      }
+    }
+  }
+}
+
+.tabs {
+  display: none;
+
+  @media screen and (max-width: 1023px) {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    z-index: 99;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 74px;
-
-    &__logo {
-      display: flex;
-      column-gap: 14px;
-      align-items: center;
-      padding: 5px 10px;
-
-      .logo-title {
-        margin: 0;
-      }
-    }
-
-    &__nav {
-      display: flex;
-      align-items: center;
-      column-gap: 100px;
-
-      .nav-item {
-        font: var(--tui-font-text-l);
-      }
-    }
-
-    &__auth {
-      display: flex;
-      align-items: center;
-      column-gap: 10px;
-
-      a {
-        font: var(--tui-font-text-m)
-      }
-    }
   }
 }

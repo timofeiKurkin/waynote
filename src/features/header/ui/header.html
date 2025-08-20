@@ -1,55 +1,88 @@
 <div class="header-background">
     <div class="app-grid">
         <div class="header">
-            <a class="header__logo" routerLink="/">
-                <img
-                        alt="waynote - logo"
-                        height="40"
-                        ngSrc="/bike.png"
-                        priority
-                        width="40"/>
+            <div class="logo-nav">
+                <a class="logo" routerLink="/">
+                    <img alt="waynote - logo"
+                         height="32"
+                         ngSrc="/bike.png"
+                         priority
+                         width="32"/>
 
-                <h5 class="tui-text_h5 logo-title">Waynote</h5>
-            </a>
+                    <h5 class="tui-text_h5 logo-title">Waynote</h5>
+                </a>
 
-            <nav>
-                <ul class="header__nav">
-                    <li>
-                        <a class="nav-item" routerLink="/">Главная</a>
-                    </li>
-                    <li>
-                        <a class="nav-item" routerLink="/my-routes">Мои маршруты</a>
-                    </li>
-                </ul>
-            </nav>
+                <nav>
+                    <ul class="nav">
+                        <li>
+                            <a class="nav-item" routerLink="/">Главная</a>
+                        </li>
+                        <li>
+                            <a class="nav-item" routerLink="/my-routes">Мои маршруты</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
-            <button
-                    appearance="primary"
-                    routerLink="/create-route"
-                    size="m"
-                    tuiButton
-                    type="button"
-            >
-                <tui-icon
-                        [style.height.rem]="1"
-                        icon="@tui.plus"
-                />
-                Создать маршрут
-            </button>
+            <div class="create-route-auth">
+                <button appearance="primary"
+                        routerLink="/create-route"
+                        size="m"
+                        tuiButton
+                        type="button"
+                >
+                    <tui-icon
+                            [style.height.rem]="1"
+                            icon="@tui.plus"
+                    />
+                    Создать маршрут
+                </button>
 
-            <div>
-                @if (isAuth) {
-                    {{ user.displayName }}
+                <div>
+                    @if (isAuth) {
+                        <button tuiButton
+                                tuiDropdownHover
+                                appearance="outline"
+                                type="button"
+                                size="m"
+                                [tuiDropdown]="dropdown"
+                                [(tuiDropdownOpen)]="open"
+                        >
+                            {{ user.displayName }}
+                            <ng-template #dropdown>
 
-                    <button (click)="logout()">выйти</button>
-                } @else {
-                    <div class="header__auth">
-                        <a tuiLink routerLink="/login"> Войти </a>
-                        <span class="no-select">|</span>
-                        <a tuiLink routerLink="/register"> Регистрация </a>
-                    </div>
-                }
+                                <tui-data-list>
+                                    <button
+                                            (click)="logout()"
+                                            tuiOption
+                                            type="button"
+                                    >
+                                        Выйти
+                                    </button>
+                                </tui-data-list>
+                            </ng-template>
+                        </button>
+                    } @else {
+                        <div class="header__auth">
+                            <a tuiLink routerLink="/login"> Войти </a>
+                            <span class="no-select">|</span>
+                            <a tuiLink routerLink="/register"> Регистрация </a>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<nav class="tabs" tuiTabBar>
+    @for (item of items; track item.text) {
+        <button tuiTabBarItem
+                type="button"
+                [icon]="item.icon"
+                [routerLink]="item.href"
+        >
+            {{ item.text }}
+        </button>
+    }
+</nav>
