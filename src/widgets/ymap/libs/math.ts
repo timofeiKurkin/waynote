@@ -21,32 +21,21 @@ const toDegrees = (x: number, y: number): Degrees => {
   return { lat, lon };
 };
 
-export const getMaxZoomForBounds = (
-  bounds: LngLatBounds,
-  mapSizePx: number
-) => {
-  const topLon = bounds[0][0];
-  const bottomLon = bounds[1][0];
-  const bottomLat = bounds[1][1];
-  const topLat = bounds[0][1];
-
-  const deltaLon = Math.abs(bottomLon - topLon);
-  const zoomX = Math.log2(((mapSizePx / deltaLon) * 360) / BASE_WORLD_SIZE);
-
-  const topMercator = Math.log(
-    Math.tan(Math.PI / 4 + (bottomLat * Math.PI) / 180 / 2)
-  );
-  const bottomMercator = Math.log(
-    Math.tan(Math.PI / 4 + (topLat * Math.PI) / 180 / 2)
-  );
-  const deltaMercator = Math.abs(topMercator - bottomMercator);
-  const zoomY = Math.log2(
-    ((mapSizePx / deltaMercator) * (2 * Math.PI)) / BASE_WORLD_SIZE
-  );
-
-  return Math.min(zoomX, zoomY);
-};
-
+//
+// Здесь я пытаюсь решить проблему "проекции Меркатора".
+// https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%86%D0%B8%D1%8F_%D0%9C%D0%B5%D1%80%D0%BA%D0%B0%D1%82%D0%BE%D1%80%D0%B0
+//
+// Причины, по которым я высчитываю квадратную рамку для маршрута:
+// 1. По дизайну карта маршрута должна быть квадратная, такое поведение максимально предсказуемое для UI/UX
+// 2. Важно было определить границы так, чтобы пользователь не мог, просматривая маршрут в РФ, оказаться где-то в Америке
+//    Грубо говоря, не грузить всю карту, а только нужный блок карты
+// 3. Зум играет очень важную роль, потому что ты можешь установить границы, но если зум не будет ограничен, пользователь сможет отдалиться и, опять же, увидеть всю карту земли
+//
+// Проблема построения карты с помощью проекции Мератора заключается в том, что чем ближе объект к полюсам земли, тем шире он становиться.
+// От этого и трудность, что я не могу просто определить самую длинную сторону маршрута и применить ее как к горизонтали, так и к вертикали.
+// Потому что на каждую сторону действуют свои правила расширения. И я хорошо увидел эту проблему, когда пытался решить задачу "в лоб". Я получал не квадрат, а прямоугольник.
+// В этой реализации функции я привожу градусы в метры, определяю самую длинную сторону и перевожу обратно в градусы, на которых работает карта.
+//
 export const calculateBounds = (
   minLat: number,
   maxLat: number,
@@ -87,6 +76,36 @@ export const calculateBounds = (
       bottomLat + bottomLat * ADDITIONAL_INDEX,
     ],
   ];
+};
+
+//
+// Продолжая решать проблему "проекции Меркатора", здесь я пытаюсь высчитать максимальный зум для текущих границ карты
+// Опять же, это адаптивное решение, как и подсчет границ. Можно без проблем задать фиксированный минимальный зум и возвращать границы не в квадратном соотношении.
+//
+export const getMaxZoomForBounds = (
+  bounds: LngLatBounds,
+  mapSizePx: number
+) => {
+  const topLon = bounds[0][0];
+  const bottomLon = bounds[1][0];
+  const bottomLat = bounds[1][1];
+  const topLat = bounds[0][1];
+
+  const deltaLon = Math.abs(bottomLon - topLon);
+  const zoomX = Math.log2(((mapSizePx / deltaLon) * 360) / BASE_WORLD_SIZE);
+
+  const topMercator = Math.log(
+    Math.tan(Math.PI / 4 + (bottomLat * Math.PI) / 180 / 2)
+  );
+  const bottomMercator = Math.log(
+    Math.tan(Math.PI / 4 + (topLat * Math.PI) / 180 / 2)
+  );
+  const deltaMercator = Math.abs(topMercator - bottomMercator);
+  const zoomY = Math.log2(
+    ((mapSizePx / deltaMercator) * (2 * Math.PI)) / BASE_WORLD_SIZE
+  );
+
+  return Math.min(zoomX, zoomY);
 };
 
 export const calculateCenter = (bounds: LngLatBounds): LngLat => {
