@@ -1,13 +1,13 @@
 import { QuerySnapshot } from 'firebase/firestore';
-import { ITrailCard } from '../../../app/shared/components/lists/trail-list/trail-card-interface';
-import { buildTrailCard } from '../../../app/shared/components/lists/trail-list/trail-card/build-trail-card';
+import { ITrailCard } from '../trail-card-interface';
+import { buildTrailCardFromDocument } from './build-trail-card-from-document';
 
 export const buildTrailCardFromSnapshot = (snapshot: QuerySnapshot) => {
   const routes: ITrailCard[] = [];
 
   snapshot.forEach(route => {
     const data = route.data();
-    const transformedRoute = buildTrailCard(data, route.id);
+    const transformedRoute = buildTrailCardFromDocument(data, route.id);
     routes.push(transformedRoute);
   });
 

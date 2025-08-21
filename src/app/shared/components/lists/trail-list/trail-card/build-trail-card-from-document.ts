@@ -1,8 +1,8 @@
 import { DocumentData } from 'firebase/firestore';
-import { buildGpxObjectFromDocument } from '../../../../../../entities/route/libs/build-gpx-object-from-document';
+import { buildGpxObjectFromDocument } from './build-gpx-object-from-document';
 import { ITrailCard } from '../trail-card-interface';
 
-export const buildTrailCard = (data: DocumentData, id: string): ITrailCard => {
+export const buildTrailCardFromDocument = (data: DocumentData, id: string): ITrailCard => {
   return {
     id,
     gpx: buildGpxObjectFromDocument(data),

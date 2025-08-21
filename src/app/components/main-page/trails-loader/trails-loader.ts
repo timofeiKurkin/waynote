@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
 import { ErrorService } from '../../../shared/components/loader/error-service/error-service';
-import { buildTrailCardFromSnapshot } from '../../../../entities/route/libs/build-trail-card-from-snapshot';
+import { buildTrailCardFromSnapshot } from '../../../shared/components/lists/trail-list/trail-card/build-trail-card-from-snapshot';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TuiChevron, TuiComboBox, TuiDataListWrapper, TuiFilterByInputPipe } from '@taiga-ui/kit';
 import { TuiTextfield } from '@taiga-ui/core';

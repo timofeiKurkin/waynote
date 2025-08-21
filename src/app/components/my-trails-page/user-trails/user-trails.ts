@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { buildTrailCardFromSnapshot } from '../../../../entities/route/libs/build-trail-card-from-snapshot';
+import { buildTrailCardFromSnapshot } from '../../../shared/components/lists/trail-list/trail-card/build-trail-card-from-snapshot';
 import { ErrorService } from '../../../shared/components/loader/error-service/error-service';
 import { AuthStateService } from '../../../auth/auth-state/auth-state-service';
 import { UserTrailsService } from './user-trails-service/user-trails-service';
