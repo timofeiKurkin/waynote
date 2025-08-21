@@ -8,13 +8,13 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { appRoutes } from './app.routes';
 import { provideYConfig } from 'angular-yandex-maps-v3';
 import { onAuthStateChanged } from 'firebase/auth';
-import { AuthService } from '../entities/user/state/auth-service';
-import { firebaseAuth } from '../shared/api/firebase/firebase';
+import { firebaseAuth } from './shared/api/firebase/firebase';
 import { environment } from '../environment/environment';
 import { provideHttpClient } from '@angular/common/http';
+import { appRoutes } from './routes/app.routes';
+import { AuthStateService } from './auth/auth-state/auth-state-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,13 +23,13 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideAppInitializer(() => {
-      const authService = inject(AuthService);
+      const authStateService = inject(AuthStateService);
 
       return new Promise<void>(resolve => {
         onAuthStateChanged(firebaseAuth, user => {
           if (user) {
-            authService.setUser(user);
-            authService.setIsAuth(true);
+            authStateService.setUser(user);
+            authStateService.setIsAuth(true);
           }
           resolve();
         });

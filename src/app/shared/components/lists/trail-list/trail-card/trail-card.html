@@ -1,0 +1,13 @@
+<li class="route-card" tuiAppearance="floating">
+  <div class="static-map-wrapper">
+    <app-static-map [GPX]="trail().gpx" [mapSize]="400"></app-static-map>
+  </div>
+
+  <div class="trail-card__content">
+    <div>{{ trail().city }} - {{ trail().year }}</div>
+
+    <h6 class="tui-text_h6">{{ trail().title }}</h6>
+
+    <button [routerLink]="[trail().id]" appearance="primary" tuiButton type="button">Подробнее о маршруте</button>
+  </div>
+</li>

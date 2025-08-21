@@ -1,0 +1,31 @@
+.trail-card {
+  display: block;
+  width: 400px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: var(--tui-background-base);
+
+  @media screen and (max-width: 889px) {
+    width: 100%;
+  }
+
+  .static-map-wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: var(--tui-background-neutral-2);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 20px;
+
+    h6 {
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div class="route-list-loader">
+  <div class="list-header">
+    <form [formGroup]="filterForm" class="filters-form">
+      <tui-textfield tuiChevron>
+        <input #cityInput formControlName="cityFiltering" placeholder="Фильтр по городу" tuiComboBox />
+
+        <tui-data-list-wrapper *tuiTextfieldDropdown [items]="cities | tuiFilterByInput" new />
+      </tui-textfield>
+
+      <tui-textfield tuiChevron>
+        <input formControlName="yearFiltering" placeholder="Фильтр по году" tuiComboBox />
+
+        <tui-data-list-wrapper *tuiTextfieldDropdown [items]="years | tuiFilterByInput" new />
+      </tui-textfield>
+    </form>
+  </div>
+
+  <app-trail-list [isError]="isError" [trails]="filteredRoutes()"></app-trail-list>
+</div>

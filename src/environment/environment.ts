@@ -13,8 +13,7 @@ export const environment: Environment = {
   firebaseConfig: {
     apiKey: 'FIREBASE_API_KEY',
     authDomain: 'waynote-1d1d5.firebaseapp.com',
-    databaseURL:
-      'https://waynote-1d1d5-default-rtdb.europe-west1.firebasedatabase.app',
+    databaseURL: 'https://waynote-1d1d5-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: 'waynote-1d1d5',
     storageBucket: 'waynote-1d1d5.firebasestorage.app',
     messagingSenderId: 'FIREBASE_MESSAGING_SENDER_ID',

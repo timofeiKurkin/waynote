@@ -1,0 +1,44 @@
+<app-auth-form-wrapper>
+  <form (submit)="registration()" [formGroup]="registrationForm" class="form" form tuiForm="l">
+    <header tuiHeader>
+      <h3 tuiTitle>
+        Создать новый аккаунт
+        <span tuiSubtitle>Найди свой маршрут в Waynote</span>
+      </h3>
+    </header>
+
+    <tui-textfield>
+      <label for="registration-name" tuiLabel>Ваше имя</label>
+      <input formControlName="name" id="registration-name" placeholder="Имя" tuiTextfield />
+    </tui-textfield>
+    <tui-error [error]="[] | tuiFieldError | async" formControlName="name" />
+
+    <tui-textfield [tuiTextfieldCleaner]="false">
+      <label for="registration-email" tuiLabel>Email</label>
+      <input formControlName="email" id="registration-email" placeholder="Email" tuiTextfield />
+    </tui-textfield>
+    <tui-error [error]="[] | tuiFieldError | async" formControlName="email" />
+
+    <tui-textfield [tuiTextfieldCleaner]="false">
+      <label for="registration-password" tuiLabel>Пароль</label>
+      <input formControlName="password" id="registration-password" tuiTextfield type="password" />
+      <tui-icon tuiPassword />
+    </tui-textfield>
+    <tui-error [error]="[] | tuiFieldError | async" formControlName="password" />
+
+    <label tuiLabel>
+      <input formControlName="policy" tuiCheckbox type="checkbox" />
+      Мы будем хранить ваш email
+    </label>
+
+    <tui-error [error]="[] | tuiFieldError | async" formControlName="policy" />
+
+    <footer>
+      <button tuiButton type="submit">Регистрация</button>
+    </footer>
+
+    <a routerLink="/login" tuiLink> У меня уже есть аккаунт </a>
+  </form>
+
+  <app-auth-google ways-to-auth></app-auth-google>
+</app-auth-form-wrapper>
