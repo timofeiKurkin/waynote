@@ -1,63 +1,49 @@
 <app-auth-form-wrapper>
-    <form
-            (submit)="login()"
-            [formGroup]="loginForm"
-            class="form"
-            form
-            tuiForm="l"
-    >
-        <header tuiHeader>
-            <h3 tuiTitle>
-                Войти в аккаунт
-                <span tuiSubtitle>Найди свой маршрут в Waynote</span>
-            </h3>
-        </header>
+  <form
+    (submit)="login()"
+    [formGroup]="loginForm"
+    class="form"
+    form
+    tuiForm="l">
+    <header tuiHeader>
+      <h3 tuiTitle>
+        Войти в аккаунт
+        <span tuiSubtitle>Найди свой маршрут в Waynote</span>
+      </h3>
+    </header>
 
-        <tui-textfield [tuiTextfieldCleaner]="false">
-            <label for="email" tuiLabel>Email</label>
-            <input
-                    formControlName="email"
-                    id="email"
-                    placeholder="Email"
-                    tuiTextfield
-            />
-        </tui-textfield>
+    <tui-textfield [tuiTextfieldCleaner]="false">
+      <label for="email" tuiLabel>Email</label>
+      <input
+        formControlName="email"
+        id="email"
+        placeholder="Email"
+        tuiTextfield />
+    </tui-textfield>
 
-        <tui-error
-                [error]="[] | tuiFieldError | async"
-                formControlName="email"
-        />
+    <tui-error [error]="[] | tuiFieldError | async" formControlName="email" />
 
+    <tui-textfield [tuiTextfieldCleaner]="false">
+      <label for="password" tuiLabel>Пароль</label>
+      <input
+        formControlName="password"
+        id="password"
+        tuiTextfield
+        type="password" />
+      <tui-icon tuiPassword />
+    </tui-textfield>
+    <tui-error
+      [error]="[] | tuiFieldError | async"
+      formControlName="password" />
 
-        <tui-textfield [tuiTextfieldCleaner]="false">
-            <label for="password" tuiLabel>Пароль</label>
-            <input
-                    formControlName="password"
-                    id="password"
-                    tuiTextfield
-                    type="password"
-            />
-            <tui-icon tuiPassword/>
-        </tui-textfield>
-        <tui-error
-                [error]="[] | tuiFieldError | async"
-                formControlName="password"
-        />
+    <footer>
+      <button tuiButton type="submit">Войти</button>
+    </footer>
 
+    <a routerLink="/register" tuiLink>
+      Нет аккаунта? Зарегистрируйтесь - это просто!
+    </a>
+  </form>
 
-        <footer>
-            <button
-                    tuiButton
-                    type="submit"
-            >
-                Войти
-            </button>
-        </footer>
-
-        <a routerLink="/register" tuiLink>
-            Нет аккаунта? Зарегистрируйтесь - это просто!
-        </a>
-    </form>
-
-    <app-auth-google ways-to-auth></app-auth-google>
+  <app-auth-google ways-to-auth></app-auth-google>
 </app-auth-form-wrapper>

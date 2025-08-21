@@ -1,140 +1,120 @@
 <div class="create-route">
-    <tui-stepper [activeItemIndex]="formStepIndex()">
-        <button [disabled]="true"
-                tuiStep
-                type="button"
+  <tui-stepper [activeItemIndex]="formStepIndex()">
+    <button [disabled]="true" tuiStep type="button">Загрузка маршрута</button>
+    <button [disabled]="true" tuiStep type="button">Описание маршрута</button>
+  </tui-stepper>
+
+  @switch (formStepIndex()) { @case (0) {
+  <form tuiCardLarge tuiAppearance="floating">
+    <header tuiHeader>
+      <h2 tuiTitle>
+        Загрузка файла GPX
+        <span tuiSubtitle></span>
+      </h2>
+    </header>
+
+    <div class="load-map">
+      <app-drop-zone (loadGPX)="loadFile($event)"></app-drop-zone>
+
+      <app-ymap [GPX]="paredGPX()" [mapSize]="500"></app-ymap>
+    </div>
+  </form>
+
+  <footer>
+    <button
+      appearance="secondary"
+      size="l"
+      tuiButton
+      routerLink="/"
+      type="button">
+      Отмена
+    </button>
+    <button (click)="next()" size="l" tuiButton type="submit">
+      Описать маршрут
+    </button>
+  </footer>
+  } @case (1) {
+  <form
+    [formGroup]="describeRouteForm"
+    tuiAppearance="floating"
+    tuiCardLarge
+    tuiForm="l">
+    <header tuiHeader>
+      <h2 tuiTitle>
+        Описание маршрута
+        <span class="header-subtitle" tuiSubtitle
+          >Не стесняйтесь описывать ваш маршрут, это поможет другим
+          велосипедистам.</span
         >
-            Загрузка маршрута
-        </button>
-        <button [disabled]="true"
-                tuiStep
-                type="button"
-        >
-            Описание маршрута
-        </button>
-    </tui-stepper>
+      </h2>
+    </header>
 
-    @switch (formStepIndex()) {
-        @case (0) {
-            <form tuiCardLarge tuiAppearance="floating">
-                <header tuiHeader>
-                    <h2 tuiTitle>
-                        Загрузка файла GPX
-                        <span tuiSubtitle></span>
-                    </h2>
-                </header>
+    <tui-textfield class="text-field">
+      <label for="route-title" tuiLabel>Название маршрута</label>
+      <input
+        formControlName="title"
+        id="route-title"
+        placeholder="Название"
+        tuiTextfield />
+    </tui-textfield>
+    <tui-error [error]="[] | tuiFieldError | async" formControlName="title" />
 
-                <div class="load-map">
-                    <app-drop-zone (loadGPX)="loadFile($event)"></app-drop-zone>
+    <tui-textfield class="text-field">
+      <label for="route-title" tuiLabel>Город</label>
+      <input
+        formControlName="city"
+        id="route-title"
+        placeholder="Город"
+        tuiTextfield />
+    </tui-textfield>
+    <tui-error [error]="[] | tuiFieldError | async" formControlName="city" />
 
-                    <app-ymap [GPX]="paredGPX()" [mapSize]="500"></app-ymap>
-                </div>
-            </form>
+    <tui-textfield class="text-field">
+      <label for="route-year" tuiLabel>Укажите дату создания маршрута</label>
+      <input
+        [max]="2025"
+        [min]="2004"
+        formControlName="year"
+        id="route-year"
+        tuiInputYear />
+      <tui-calendar-year *tuiTextfieldDropdown />
+    </tui-textfield>
+    <tui-error [error]="[] | tuiFieldError | async" formControlName="year" />
 
-            <footer>
-                <button appearance="secondary"
-                        size="l"
-                        tuiButton
-                        routerLink="/"
-                        type="button"
-                >
-                    Отмена
-                </button>
-                <button (click)="next()"
-                        size="l"
-                        tuiButton
-                        type="submit"
-                >
-                    Описать маршрут
-                </button>
-            </footer>
-        }
-        @case (1) {
-            <form [formGroup]="describeRouteForm"
-                  tuiAppearance="floating"
-                  tuiCardLarge
-                  tuiForm="l">
-                <header tuiHeader>
-                    <h2 tuiTitle>
-                        Описание маршрута
-                        <span class="header-subtitle" tuiSubtitle>Не стесняйтесь описывать ваш маршрут, это поможет другим велосипедистам.</span>
-                    </h2>
-                </header>
+    <tui-textfield class="text-field">
+      <label for="route-description" tuiLabel>Описание</label>
+      <textarea
+        [limit]="300"
+        [max]="6"
+        [min]="3"
+        formControlName="description"
+        id="route-description"
+        placeholder="Опишите сложные и опасные участки. Можете указать точки ночлега и перевалы."
+        tuiTextarea></textarea>
+    </tui-textfield>
+    <tui-error
+      [error]="[] | tuiFieldError | async"
+      formControlName="description" />
+  </form>
 
-
-                <tui-textfield class="text-field">
-                    <label for="route-title" tuiLabel>Название маршрута</label>
-                    <input formControlName="title"
-                           id="route-title"
-                           placeholder="Название"
-                           tuiTextfield
-                    />
-                </tui-textfield>
-                <tui-error [error]="[] | tuiFieldError | async"
-                           formControlName="title"
-                />
-
-                <tui-textfield class="text-field">
-                    <label for="route-title" tuiLabel>Город</label>
-                    <input formControlName="city"
-                           id="route-title"
-                           placeholder="Город"
-                           tuiTextfield
-                    />
-                </tui-textfield>
-                <tui-error [error]="[] | tuiFieldError | async"
-                           formControlName="city"
-                />
-
-                <tui-textfield class="text-field">
-                    <label for="route-year" tuiLabel>Укажите дату создания маршрута</label>
-                    <input [max]="2025"
-                           [min]="2004"
-                           formControlName="year"
-                           id="route-year"
-                           tuiInputYear
-                    />
-                    <tui-calendar-year *tuiTextfieldDropdown/>
-                </tui-textfield>
-                <tui-error [error]="[] | tuiFieldError | async"
-                           formControlName="year"
-                />
-
-                <tui-textfield class="text-field">
-                    <label for="route-description" tuiLabel>Описание</label>
-                    <textarea [limit]="300"
-                              [max]="6"
-                              [min]="3"
-                              formControlName="description"
-                              id="route-description"
-                              placeholder="Опишите сложные и опасные участки. Можете указать точки ночлега и перевалы."
-                              tuiTextarea
-                    ></textarea>
-                </tui-textfield>
-                <tui-error [error]="[] | tuiFieldError | async"
-                           formControlName="description"
-                />
-            </form>
-
-            <footer>
-                <button (click)="previous()"
-                        appearance="secondary"
-                        size="l"
-                        tuiButton
-                        [disabled]="formIsSending()"
-                        type="button"
-                >
-                    Назад
-                </button>
-                <button size="l"
-                        tuiButton
-                        [loading]="formIsSending()"
-                        (click)="createRoute()"
-                        type="submit"
-                >
-                    Создать маршрут
-                </button>
-            </footer>
-        }
-    }
+  <footer>
+    <button
+      (click)="previous()"
+      appearance="secondary"
+      size="l"
+      tuiButton
+      [disabled]="formIsSending()"
+      type="button">
+      Назад
+    </button>
+    <button
+      size="l"
+      tuiButton
+      [loading]="formIsSending()"
+      (click)="createRoute()"
+      type="submit">
+      Создать маршрут
+    </button>
+  </footer>
+  } }
 </div>

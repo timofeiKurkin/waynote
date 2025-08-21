@@ -1,26 +1,36 @@
-image: node:20
-variables:
-  CI: 'true'
+image: node:22
 
-# Main job
-CI:
-  interruptible: true
-  only:
-    - main
-    - merge_requests
+stages:
+  - install
+  - lint
+  - prettier
+  - build
+
+install:
+  stage: install
   script:
-    # This enables task distribution via Nx Cloud
-    # Run this command as early as possible, before dependencies are installed
-    # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
-    # Uncomment this line to enable task distribution
-    # - npx nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build"
-
     - npm ci --legacy-peer-deps
+  artifacts:
+    paths:
+      - node_modules/
 
-    # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-    # - npx nx-cloud record -- echo Hello World
-    - npx nx run-many -t lint test build
-    # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
+lint:
+  stage: lint
+  script:
+    - npm run lint
+  dependencies:
+    - install
 
-  after_script:
-    - npx nx fix-ci
+prettier:
+  stage: prettier
+  script:
+    - npm run prettier:fix
+  dependencies:
+    - install
+
+build:
+  stage: build
+  script:
+    - npm run build
+  dependencies:
+    - install

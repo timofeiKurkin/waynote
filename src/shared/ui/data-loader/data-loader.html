@@ -1,15 +1,13 @@
 @if (isLoading()) {
-    <tui-loader size="xl" [style.overflow]="'visible'"/>
+<tui-loader size="xl" [style.overflow]="'visible'" />
 } @else if (isError()) {
-    <tui-block-status class="tui-space_vertical-12">
-        <h1 class="tui-text_h1">
-            404
-        </h1>
+<tui-block-status class="tui-space_vertical-12">
+  <h1 class="tui-text_h1">404</h1>
 
-        <h4>Ошибка!</h4>
+  <h4>Ошибка!</h4>
 
-        Ошибка при загрузке данных или таких данных пока не существует
-    </tui-block-status>
+  Ошибка при загрузке данных или таких данных пока не существует
+</tui-block-status>
 } @else {
-    <ng-content></ng-content>
+<ng-content></ng-content>
 }
