@@ -3,8 +3,8 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TuiButton, TuiDataList, TuiDropdown, TuiIcon, TuiLink } from '@taiga-ui/core';
 import { TuiTabBarComponent, TuiTabBarItem } from '@taiga-ui/addon-mobile';
-import { LogoutService } from '../../../auth/logout-service/logout-service';
-import { AuthStateService } from '../../../auth/auth-state/auth-state-service';
+import { LogoutService } from '../../../core/auth/logout-service/logout-service';
+import { AuthStateService } from '../../../core/auth/auth-state/auth-state-service';
 
 @Component({
   selector: 'app-header',

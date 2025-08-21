@@ -16,7 +16,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TuiFieldErrorPipe, TuiPassword } from '@taiga-ui/kit';
 import { LoginFormControls } from './login-form-interface';
 import { passwordValidationRegx } from '../../../shared/components/form/validationPatterns';
-import { AuthGoogle } from '../../../auth/auth-google/auth-google';
+import { AuthGoogle } from '../../../core/auth/auth-google/auth-google';
 import { formValidationErrorsMap } from '../../../shared/components/form/formValidationErrorsMap';
 import { Router, RouterLink } from '@angular/router';
 import { AuthFormWrapper } from '../../../shared/components/form/auth-form-wrapper/auth-form-wrapper';

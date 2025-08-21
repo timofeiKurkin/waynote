@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, input, OnInit, signal } from '@angu
 import { CommonModule } from '@angular/common';
 import { ParsedGPX, ParsedGPXInputs } from '@we-gold/gpxjs';
 import { catchError, EMPTY, map, take } from 'rxjs';
-import { ErrorService } from '../../loader/error-service/error-service';
-import { DataLoader } from '../../loader/data-loader/data-loader';
+import { ErrorService } from '../../../../core/error-service/error-service';
+import { DataLoader } from '../../data-loader/data-loader';
 import { parseTracksForStatic } from '../libs/parseTracksForStatic';
 import { getMaxZoomForBounds } from '../libs/math';
 import { StaticMapService } from './static-map-service/static-map-service';

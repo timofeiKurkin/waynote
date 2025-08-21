@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataLoader } from '../../../shared/components/loader/data-loader/data-loader';
-import { ErrorService } from '../../../shared/components/loader/error-service/error-service';
+import { DataLoader } from '../../../shared/components/data-loader/data-loader';
+import { ErrorService } from '../../../core/error-service/error-service';
 import { ActivatedRoute } from '@angular/router';
 import { catchError, EMPTY, finalize, from, map, Observable, switchMap, take } from 'rxjs';
 import { Ymap } from '../../../shared/components/maps/ymap/ymap';

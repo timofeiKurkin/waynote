@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { signInWithPopup } from 'firebase/auth';
-import { firebaseAuth, googleAuthProvider } from '../../../shared/api/firebase/firebase';
+import { firebaseAuth, googleAuthProvider } from '../../../api/firebase/firebase';
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
 import { take } from 'rxjs';

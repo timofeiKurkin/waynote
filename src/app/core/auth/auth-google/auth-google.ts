@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthGoogleService } from './auth-google-service/auth-google-service';
-import { AuthGoogleButton } from '../../shared/components/buttons/auth-google-button/auth-google-button';
+import { AuthGoogleButton } from '../../../shared/components/buttons/auth-google-button/auth-google-button';
 
 @Component({
   selector: 'app-auth-google',

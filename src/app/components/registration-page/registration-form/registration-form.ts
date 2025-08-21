@@ -15,11 +15,11 @@ import {
 import { TuiCheckbox, TuiFieldErrorPipe, TuiPassword } from '@taiga-ui/kit';
 import { TuiForm, TuiHeader } from '@taiga-ui/layout';
 import { passwordValidationRegx } from '../../../shared/components/form/validationPatterns';
-import { AuthGoogle } from '../../../auth/auth-google/auth-google';
+import { AuthGoogle } from '../../../core/auth/auth-google/auth-google';
 import { formValidationErrorsMap } from '../../../shared/components/form/formValidationErrorsMap';
 import { Router, RouterLink } from '@angular/router';
 import { RegistrationFormControls } from './registration-form-interface';
-import { AuthStateService } from '../../../auth/auth-state/auth-state-service';
+import { AuthStateService } from '../../../core/auth/auth-state/auth-state-service';
 import { RegistrationService } from '../registration-service/registration-service';
 import { AuthFormWrapper } from '../../../shared/components/form/auth-form-wrapper/auth-form-wrapper';
 

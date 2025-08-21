@@ -33,7 +33,7 @@ import { ITrail } from './trail-interface';
 import { formValidationErrorsMap } from '../../../shared/components/form/formValidationErrorsMap';
 import { Timestamp } from 'firebase/firestore';
 import { DropZone } from '../../../shared/components/form/drop-zone/drop-zone';
-import { AuthStateService } from '../../../auth/auth-state/auth-state-service';
+import { AuthStateService } from '../../../core/auth/auth-state/auth-state-service';
 import { CreateTrailService } from './create-trail-service/create-trail-service';
 
 @Component({

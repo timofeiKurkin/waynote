@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { DataLoader } from '../../loader/data-loader/data-loader';
+import { DataLoader } from '../../data-loader/data-loader';
 import { TuiBlockStatusComponent } from '@taiga-ui/layout';
 import { TrailCard } from './trail-card/trail-card';
 import { ITrailCard } from './trail-card-interface';

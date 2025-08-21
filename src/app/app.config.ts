@@ -10,11 +10,11 @@ import {
 import { provideRouter } from '@angular/router';
 import { provideYConfig } from 'angular-yandex-maps-v3';
 import { onAuthStateChanged } from 'firebase/auth';
-import { firebaseAuth } from './shared/api/firebase/firebase';
+import { firebaseAuth } from './core/api/firebase/firebase';
 import { environment } from '../environment/environment';
 import { provideHttpClient } from '@angular/common/http';
-import { appRoutes } from './routes/app.routes';
-import { AuthStateService } from './auth/auth-state/auth-state-service';
+import { appRoutes } from './app.routes';
+import { AuthStateService } from './core/auth/auth-state/auth-state-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [

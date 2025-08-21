@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { signOut } from 'firebase/auth';
-import { firebaseAuth } from '../../shared/api/firebase/firebase';
+import { firebaseAuth } from '../../api/firebase/firebase';
 
 @Injectable({
   providedIn: 'root',
