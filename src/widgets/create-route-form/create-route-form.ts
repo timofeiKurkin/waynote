@@ -60,7 +60,6 @@ import { Timestamp } from 'firebase/firestore';
     TuiCardLarge,
     TuiError,
     TuiFieldErrorPipe,
-    TuiForm,
     TuiHeader,
     TuiInputYearDirective,
     TuiLabel,
@@ -73,6 +72,7 @@ import { Timestamp } from 'firebase/firestore';
     TuiTitle,
     Ymap,
     TuiTextfieldDropdownDirective,
+    TuiForm,
   ],
   templateUrl: './create-route-form.html',
   styleUrl: './create-route-form.less',
@@ -140,12 +140,12 @@ export class CreateRouteForm {
   }
 
   createRoute() {
-    this.formIsSending.set(true);
-
     if (!this.describeRouteForm.valid) {
       this.describeRouteForm.markAllAsTouched();
       return;
     }
+
+    this.formIsSending.set(true);
 
     const { title, description, city, year } = this.describeRouteForm.value;
 
