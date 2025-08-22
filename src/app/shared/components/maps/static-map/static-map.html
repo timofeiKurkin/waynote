@@ -1,8 +1,7 @@
 <div [style.height]="mapSize() + 'px'" [style.max-width]="mapSize() + 'px'" class="map-preview">
-    <app-data-loader [isError]="isError" [isLoading]="!isError && !staticMap()">
+    <app-data-loader [isError]="isError" [isLoading]="!isError && !staticMap()" [style.width]="'100%'">
         @if (staticMap()) {
-            <img [style.height]="mapSize() + 'px'" [src]="staticMap()" [style.max-width]="mapSize() + 'px'"
-                 alt="Static map"/>
+            <img [src]="staticMap()" alt="Static map"/>
         }
     </app-data-loader>
 </div>
