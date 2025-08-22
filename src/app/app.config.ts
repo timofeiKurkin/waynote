@@ -2,6 +2,7 @@ import { provideEventPlugins } from '@taiga-ui/event-plugins';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   ApplicationConfig,
+  ErrorHandler,
   inject,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
@@ -16,20 +17,29 @@ import { provideHttpClient } from '@angular/common/http';
 import { appRoutes } from './app.routes';
 import { AuthStateService } from './core/auth/auth-state/auth-state-service';
 import { filter } from 'rxjs';
+import * as Sentry from '@sentry/angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler(),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
     provideAnimations(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideAppInitializer(() => {
+      inject(Sentry.TraceService);
       const authStateService = inject(AuthStateService);
       const router = inject(Router);
 
       return new Promise<void>(resolve => {
         onAuthStateChanged(firebaseAuth, user => {
-          console.log('user: ', user);
           if (user) {
             authStateService.setUser(user);
             authStateService.setIsAuth(true);
@@ -46,19 +56,6 @@ export const appConfig: ApplicationConfig = {
           resolve();
         });
       });
-
-      // Авторизация через редирект в google, а потом обратно в приложение.
-      // getRedirectResult(firebaseAuth)
-      //   .then(res => {
-      //     console.log(res);
-      //     if (res) {
-      //       authService.setUser(res.user);
-      //       authService.setIsAuth(!!res.user);
-      //     }
-      //   })
-      //   .catch(error => {
-      //     console.log('Ошибка при авторизации через Google', error);
-      //   });
     }),
     provideYConfig(environment.YConfig),
     provideHttpClient(),

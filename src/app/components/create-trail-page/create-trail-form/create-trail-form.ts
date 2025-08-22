@@ -35,6 +35,7 @@ import { Timestamp } from 'firebase/firestore';
 import { DropZone } from '../../../shared/components/form/drop-zone/drop-zone';
 import { AuthStateService } from '../../../core/auth/auth-state/auth-state-service';
 import { CreateTrailService } from './create-trail-service/create-trail-service';
+import * as Sentry from '@sentry/angular';
 
 @Component({
   selector: 'app-create-trail-form',
@@ -113,7 +114,9 @@ export class CreateTrailForm {
             })
             .pipe(take(1))
             .subscribe();
-          console.error('Ошибка при обработке GPX файла', err);
+
+          Sentry.captureException(err);
+
           return EMPTY;
         }),
         take(1)
