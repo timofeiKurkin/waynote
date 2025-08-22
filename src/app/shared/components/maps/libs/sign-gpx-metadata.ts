@@ -4,8 +4,8 @@ export const signGpxMetadata = (metadata: MetaData, title: string, description: 
   return {
     author: {
       link: { href: '', text: '', type: '' },
-      name: metadata.author.name,
-      email: metadata.author.email,
+      name: metadata.author.name || '',
+      email: metadata.author.email || { id: '', domain: '' },
     },
     description: description,
     name: title,
