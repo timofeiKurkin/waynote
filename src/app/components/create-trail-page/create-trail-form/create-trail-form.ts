@@ -150,7 +150,7 @@ export class CreateTrailForm {
       };
 
       this.createTrailService.createTrail(routeData).then(() => {
-        this.router.navigate(['/my-routes']).then();
+        this.router.navigate(['/my-trails']).then();
         this.alerts
           .open('Ваш маршрут успешно добавлен!', {
             label: 'Только вперед!',

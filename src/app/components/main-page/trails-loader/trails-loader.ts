@@ -81,16 +81,16 @@ export class TrailsLoader implements OnInit {
         return routes;
       })
       .then(routes => {
-        const cities: string[] = [];
-        const years: number[] = [];
+        const cities = new Set<string>();
+        const years = new Set<number>();
 
         for (const route of routes) {
-          cities.push(route.city);
-          years.push(route.year);
+          cities.add(route.city);
+          years.add(route.year);
         }
 
-        this.setCities(cities);
-        this.setYears(years);
+        this.setCities(Array.from(cities));
+        this.setYears(Array.from(years));
       })
       .catch(error => {
         this.errorService.handleError(error);

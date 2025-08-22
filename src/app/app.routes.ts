@@ -18,29 +18,36 @@ export const appRoutes: Route[] = [
     title: 'Регистрация',
   },
   {
-    path: 'my-routes',
-    loadComponent: () => import('./components/my-trails-page/my-trails-page').then(m => m.MyTrailsPage),
-    canMatch: [authGuard],
-    title: 'Мои маршруты',
-  },
-  {
-    path: 'my-routes/:id',
-    loadComponent: () => import('./components/trail-page/trail-page').then(m => m.TrailPage),
-  },
-  {
-    path: 'create-route',
+    path: 'create-trail',
     loadComponent: () => import('./components/create-trail-page/create-trail-page').then(m => m.CreateTrailPage),
     canMatch: [authGuard],
     title: 'Создать новый маршрут',
   },
   {
-    path: ':id',
+    path: 'my-trails',
+    loadComponent: () => import('./components/my-trails-page/my-trails-page').then(m => m.MyTrailsPage),
+    canMatch: [authGuard],
+    title: 'Мои маршруты',
+  },
+  {
+    path: 'my-trails/:id',
     loadComponent: () => import('./components/trail-page/trail-page').then(m => m.TrailPage),
+    title: 'Подробнее о маршруте',
+  },
+  {
+    path: 'trails',
+    component: MainPage,
+    title: 'Главная страница',
+  },
+  {
+    path: 'trails/:id',
+    loadComponent: () => import('./components/trail-page/trail-page').then(m => m.TrailPage),
+    title: 'Подробнее о маршруте',
   },
   {
     path: '',
-    component: MainPage,
-    title: 'Главная страница',
+    redirectTo: 'trails',
+    pathMatch: 'full',
   },
   {
     path: '**',
