@@ -1,5 +1,6 @@
 import { MetaData, Route, Track, Waypoint } from '@we-gold/gpxjs';
 import { Timestamp } from 'firebase/firestore';
+import { FormControl } from '@angular/forms';
 
 export interface ITrail {
   ownerId: string;
@@ -14,4 +15,11 @@ export interface ITrail {
   tracks: Track[];
   routes: Route[];
   waypoints: Waypoint[];
+}
+
+export interface DescriptionFormControls {
+  title: FormControl<string | null>;
+  description: FormControl<string> | null;
+  city: FormControl<string | null>;
+  year: FormControl<number | null>;
 }

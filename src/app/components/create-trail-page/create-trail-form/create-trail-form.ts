@@ -29,13 +29,14 @@ import { Ymap } from '../../../shared/components/maps/ymap/ymap';
 import { ParsedGPX } from '@we-gold/gpxjs';
 import { readGPXFile, stringToGPX } from '../../../shared/components/maps/libs/stringToGPX';
 import { catchError, EMPTY, map, take } from 'rxjs';
-import { ITrail } from './trail-interface';
+import { DescriptionFormControls, ITrail } from './trail-interface';
 import { formValidationErrorsMap } from '../../../shared/components/form/formValidationErrorsMap';
 import { Timestamp } from 'firebase/firestore';
 import { DropZone } from '../../../shared/components/form/drop-zone/drop-zone';
 import { AuthStateService } from '../../../core/auth/auth-state/auth-state-service';
 import { CreateTrailService } from './create-trail-service/create-trail-service';
 import * as Sentry from '@sentry/angular';
+import { signGpxMetadata } from '../../../shared/components/maps/libs/sign-gpx-metadata';
 
 @Component({
   selector: 'app-create-trail-form',
@@ -77,7 +78,7 @@ export class CreateTrailForm {
   paredGPX = signal<ParsedGPX | null>(null);
   protected formStepIndex = signal(0);
 
-  protected describeRouteForm = new FormGroup({
+  protected describeRouteForm = new FormGroup<DescriptionFormControls>({
     title: new FormControl(null, {
       validators: [Validators.required, Validators.maxLength(50), Validators.minLength(6)],
     }),
@@ -102,9 +103,7 @@ export class CreateTrailForm {
       .pipe(
         map(stringToGPX),
         map(GPX => {
-          if (GPX) {
-            this.paredGPX.set(GPX);
-          }
+          this.paredGPX.set(GPX);
         }),
         catchError(err => {
           this.alerts
@@ -136,6 +135,7 @@ export class CreateTrailForm {
 
     if (title && city && year) {
       const { routes, tracks, metadata, waypoints } = this.paredGPX();
+      const createdAt = Timestamp.now();
 
       const routeData: ITrail = {
         title,
@@ -143,12 +143,12 @@ export class CreateTrailForm {
         year,
         description,
         ownerId: this.authStateService.user.uid,
-        createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now(),
+        createdAt,
+        updatedAt: createdAt,
 
         routes,
         tracks,
-        metadata,
+        metadata: signGpxMetadata(metadata, title, description, createdAt.toDate().toISOString()),
         waypoints,
       };
 

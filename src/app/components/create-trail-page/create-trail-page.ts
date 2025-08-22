@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateTrailForm } from './create-trail-form/create-trail-form';
+import { AuthStateService } from '../../core/auth/auth-state/auth-state-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trail-route-page',
@@ -10,4 +12,12 @@ import { CreateTrailForm } from './create-trail-form/create-trail-form';
   styleUrl: './create-trail-page.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateTrailPage {}
+export class CreateTrailPage {
+  constructor(private authStateService: AuthStateService, private router: Router) {
+    effect(() => {
+      if (!this.authStateService.isAuth) {
+        this.router.navigate(['/trails']).then();
+      }
+    });
+  }
+}
