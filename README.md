@@ -2,12 +2,12 @@
 
 ## Общая информация
 
-Проект является курсовой работой для интенсива по JS.
-Репозиторий
-проекта: https://gitlab.education.tbank.ru/js-frameworks-summer-2025/Students/kurkin.timofey/Homeworks/course-work/-/tree/dev
-Автор: Куркин Тимофей Павлович
-Название приложения: Waynote
-Ссылка на приложение: https://waynote.vercel.app/trails
+- Проект является курсовой работой для интенсива по JS.
+- Репозиторий
+  проекта: https://gitlab.education.tbank.ru/js-frameworks-summer-2025/Students/kurkin.timofey/Homeworks/course-work/-/tree/dev
+- Автор: Куркин Тимофей Павлович
+- Название приложения: Waynote
+- Ссылка на приложение: https://waynote.vercel.app/trails
 
 ## Как запустить?
 
