@@ -4,9 +4,11 @@
     </div>
 
     <div class="trail-card__content">
-        <div>{{ trail().city }} - {{ trail().year }}</div>
+        <div class="trail-description">
+            <span>{{ trail().city }}</span> - <span>{{ trail().year }}</span>
+        </div>
 
-        <h6 class="tui-text_h6">{{ trail().title }}</h6>
+        <h6 class="tui-text_h6 card-title">{{ trail().title }}</h6>
 
         <button [routerLink]="[trail().id]" appearance="primary" tuiButton type="button">Подробнее о маршруте
         </button>

@@ -21,7 +21,29 @@
     row-gap: 20px;
     padding: 20px;
 
-    h6 {
+    .card-title {
+      max-width: 300px;
+    }
+
+    .city-content {
+      display: flex;
+      max-width: 120px;
+    }
+
+    .trail-description {
+      display: flex;
+      column-gap: 10px;
+
+      span {
+        display: block;
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    h6, .city-content {
       margin: 0;
       white-space: nowrap;
       overflow: hidden;

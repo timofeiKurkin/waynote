@@ -1,7 +1,8 @@
-<div [style.height]="mapSize() + 'px'" [style.width]="mapSize() + 'px'" class="map-preview">
-  <app-data-loader [isError]="isError" [isLoading]="!isError && !staticMap()">
-    @if (staticMap()) {
-    <img [style.height]="mapSize() + 'px'" [src]="staticMap()" [style.width]="mapSize() + 'px'" alt="Static map" />
-    }
-  </app-data-loader>
+<div [style.height]="mapSize() + 'px'" [style.max-width]="mapSize() + 'px'" class="map-preview">
+    <app-data-loader [isError]="isError" [isLoading]="!isError && !staticMap()">
+        @if (staticMap()) {
+            <img [style.height]="mapSize() + 'px'" [src]="staticMap()" [style.max-width]="mapSize() + 'px'"
+                 alt="Static map"/>
+        }
+    </app-data-loader>
 </div>

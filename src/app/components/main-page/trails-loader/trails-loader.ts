@@ -90,7 +90,7 @@ export class TrailsLoader implements OnInit {
         }
 
         this.setCities(Array.from(cities));
-        this.setYears(Array.from(years));
+        this.setYears(Array.from(years).sort());
       })
       .catch(error => {
         this.errorService.handleError(error);
