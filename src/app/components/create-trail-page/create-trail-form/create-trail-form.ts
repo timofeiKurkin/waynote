@@ -73,20 +73,20 @@ import { signGpxMetadata } from '../../../shared/components/maps/libs/sign-gpx-m
 })
 export class CreateTrailForm {
   @ViewChild(DropZone) dropZoneComponent: DropZone;
-
   formIsSending = signal<boolean>(false);
   paredGPX = signal<ParsedGPX | null>(null);
+  protected descriptionMaxLength = 300;
   protected formStepIndex = signal(0);
 
   protected describeRouteForm = new FormGroup<DescriptionFormControls>({
     title: new FormControl(null, {
-      validators: [Validators.required, Validators.maxLength(50), Validators.minLength(6)],
+      validators: [Validators.required, Validators.maxLength(40), Validators.minLength(2)],
     }),
     description: new FormControl(null, {
-      validators: [Validators.maxLength(150)],
+      validators: [Validators.maxLength(this.descriptionMaxLength)],
     }),
     city: new FormControl(null, {
-      validators: [Validators.required, Validators.maxLength(50), Validators.minLength(2)],
+      validators: [Validators.required, Validators.maxLength(35), Validators.minLength(2)],
     }),
     year: new FormControl(null, { validators: [Validators.required] }),
   });

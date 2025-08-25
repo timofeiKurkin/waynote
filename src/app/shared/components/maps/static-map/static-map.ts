@@ -46,7 +46,7 @@ export class StaticMap implements OnInit {
           type: 'polyline',
           linecolor: '#000000',
           lineopacity: 1,
-          linewidth: 4,
+          linewidth: 3,
           linestyle: 'solid',
           value,
         },

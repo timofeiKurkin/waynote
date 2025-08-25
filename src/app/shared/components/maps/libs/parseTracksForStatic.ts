@@ -27,7 +27,7 @@ export const parseTracksForStatic = (GPXPoints: Point[]) => {
   // https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm
   // https://mourner.github.io/simplify-js/
   // Примеры сокращения кол-ва точек: 4917 -> 418, 334 -> 113, 1163 -> 69
-  const simplified = Simplify(simplifyPoints, 0.001);
+  const simplified = Simplify(simplifyPoints, 0.005, true);
 
   const value = simplified.map(point => ({
     lat: point['y'],

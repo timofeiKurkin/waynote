@@ -57,7 +57,7 @@
     <tui-textfield class="text-field">
       <label for="route-description" tuiLabel>Описание</label>
       <textarea
-        [limit]="300"
+        [limit]="descriptionMaxLength"
         [max]="6"
         [min]="3"
         formControlName="description"

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   TuiButton,
@@ -21,6 +21,7 @@ import { formValidationErrorsMap } from '../../../shared/components/form/formVal
 import { Router, RouterLink } from '@angular/router';
 import { AuthFormWrapper } from '../../../shared/components/form/auth-form-wrapper/auth-form-wrapper';
 import { LoginService } from '../login-service/login-service';
+import { TuiValidationError } from '@taiga-ui/cdk';
 
 @Component({
   standalone: true,
@@ -59,8 +60,14 @@ export class LoginForm {
       validators: [Validators.required, Validators.minLength(6), Validators.pattern(passwordValidationRegx)],
     }),
   });
+  isWrongCredentials = signal(false);
+  protected error = new TuiValidationError('Неправильный логин или пароль');
 
   constructor(private loginService: LoginService, private router: Router) {}
+
+  protected get computedError(): TuiValidationError | null {
+    return this.isWrongCredentials() ? this.error : null;
+  }
 
   login() {
     if (!this.loginForm.valid) {
@@ -71,9 +78,14 @@ export class LoginForm {
     const { email, password } = this.loginForm.value;
 
     if (email && password) {
-      this.loginService.login(email, password).then(() => {
-        this.router.navigate(['/']).then();
-      });
+      this.loginService
+        .login(email, password)
+        .then(() => {
+          this.router.navigate(['/']).then();
+        })
+        .catch(() => {
+          this.isWrongCredentials.set(true);
+        });
     }
   }
 }

@@ -1,72 +1,71 @@
 <div class="header-background">
-    <div class="app-grid">
-        <div class="header">
-            <div class="logo-nav">
-                <a class="logo" routerLink="/">
-                    <img alt="waynote - logo" height="32" ngSrc="/bike.png" priority width="32"/>
+  <div class="app-grid">
+    <div class="header">
+      <div class="logo-nav">
+        <a class="logo" routerLink="/">
+          <img alt="waynote - logo" height="32" ngSrc="/bike.png" priority width="32" />
 
-                    <h5 class="tui-text_h5 logo-title">Waynote</h5>
-                </a>
+          <h5 class="tui-text_h5 logo-title">Waynote</h5>
+        </a>
 
-                <nav>
-                    <ul class="nav">
-                        <li>
-                            <a class="nav-item" routerLink="/">Главная</a>
-                        </li>
-                        <li>
-                            <a class="nav-item" routerLink="/my-trails">Мои маршруты</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+        <nav>
+          <ul class="nav">
+            <li>
+              <a class="nav-item" routerLink="/">Главная</a>
+            </li>
+            <li>
+              <a class="nav-item" routerLink="/my-trails">Мои маршруты</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-            <div class="create-route-auth">
-                <button appearance="primary" routerLink="/create-trail" size="m" tuiButton type="button">
-                    <tui-icon [style.height.rem]="1" icon="@tui.plus"/>
-                    Создать маршрут
-                </button>
+      <div class="create-route-auth">
+        <button appearance="primary" routerLink="/create-trail" size="m" tuiButton type="button">
+          <tui-icon [style.height.rem]="1" icon="@tui.plus" />
+          Создать маршрут
+        </button>
 
-                <div>
-                    @if (isAuth) {
-                        <button
-                                tuiButton
-                                tuiDropdownHover
-                                appearance="outline"
-                                type="button"
-                                size="m"
-                                [tuiDropdown]="dropdown"
-                                [(tuiDropdownOpen)]="open">
-                            {{ user.displayName }}
-                            <ng-template #dropdown>
-                                <tui-data-list>
-                                    <button (click)="logout()" tuiOption type="button">Выйти</button>
-                                </tui-data-list>
-                            </ng-template>
-                        </button>
-                    } @else {
-                        <div class="auth">
-                            <a tuiLink routerLink="/login"> Войти </a>
-                            <span class="no-select">|</span>
-                            <a tuiLink routerLink="/registration"> Регистрация </a>
-                        </div>
-                    }
-                </div>
-            </div>
+        <div>
+          @if (isAuth) {
+          <button
+            tuiButton
+            tuiDropdownHover
+            appearance="outline"
+            type="button"
+            size="m"
+            [tuiDropdown]="dropdown"
+            [(tuiDropdownOpen)]="open">
+            {{ user.displayName }}
+            <ng-template #dropdown>
+              <tui-data-list>
+                <button (click)="logout()" tuiOption type="button">Выйти</button>
+              </tui-data-list>
+            </ng-template>
+          </button>
+          } @else {
+          <div class="auth">
+            <a tuiLink routerLink="/login"> Войти </a>
+            <span class="no-select">|</span>
+            <a tuiLink routerLink="/registration"> Регистрация </a>
+          </div>
+          }
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <nav [activeItemIndex]="activeItemIndex()" class="tabs" tuiTabBar>
-    @for (item of items; track item.text; let index = $index) {
-        <button tuiTabBarItem type="button" (click)="setItemIndex(index)" [icon]="item.icon"
-                [routerLink]="item.href">{{ item.text }}
-        </button>
-    }
-    @if (isAuth) {
-        <button tuiTabBarItem type="button" icon="@tui.log-out" (click)="logout()">Выйти</button>
-    } @else {
-        <button tuiTabBarItem type="button" icon="@tui.log-in" (click)="items.length" routerLink="/login">Войти в
-            аккаунт
-        </button>
-    }
+  @for (item of items; track item.text; let index = $index) {
+  <button tuiTabBarItem type="button" (click)="setItemIndex(index)" [icon]="item.icon" [routerLink]="item.href">
+    {{ item.text }}
+  </button>
+  } @if (isAuth) {
+  <button tuiTabBarItem type="button" icon="@tui.log-out" (click)="logout()">Выйти</button>
+  } @else {
+  <button tuiTabBarItem type="button" icon="@tui.log-in" (click)="items.length" routerLink="/login">
+    Войти в аккаунт
+  </button>
+  }
 </nav>

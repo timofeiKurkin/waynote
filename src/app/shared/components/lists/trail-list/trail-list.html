@@ -1,17 +1,15 @@
 <app-data-loader [isError]="isError()" [isLoading]="!isError() && trails() === null">
-    @if (trails()) {
-        @if (trails().length) {
-            <ul class="trail-list">
-                @for (trail of trails(); track trail.id) {
-                    <app-trail-card [trail]="trail"></app-trail-card>
-                }
-            </ul>
-        } @else {
-            <tui-block-status>
-                <img alt="not found" ngSrc="/empty-list.png" priority width="500" height="500" tuiSlot="top"/>
-
-                <h4>Список маршрутов пуст!</h4>
-            </tui-block-status>
-        }
+  @if (trails()) { @if (trails().length) {
+  <ul class="trail-list">
+    @for (trail of trails(); track trail.id) {
+    <app-trail-card [trail]="trail"></app-trail-card>
     }
+  </ul>
+  } @else {
+  <tui-block-status>
+    <img alt="not found" ngSrc="/empty-list.png" priority width="500" height="500" tuiSlot="top" />
+
+    <h4>Список маршрутов пуст!</h4>
+  </tui-block-status>
+  } }
 </app-data-loader>

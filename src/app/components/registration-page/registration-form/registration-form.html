@@ -30,8 +30,9 @@
       <input formControlName="policy" tuiCheckbox type="checkbox" />
       Мы будем хранить ваш email
     </label>
-
     <tui-error [error]="[] | tuiFieldError | async" formControlName="policy" />
+
+    <tui-error [error]="computedError" />
 
     <footer>
       <button tuiButton type="submit">Регистрация</button>

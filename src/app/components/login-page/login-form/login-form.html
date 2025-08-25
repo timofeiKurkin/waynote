@@ -21,6 +21,8 @@
     </tui-textfield>
     <tui-error [error]="[] | tuiFieldError | async" formControlName="password" />
 
+    <tui-error [error]="computedError" />
+
     <footer>
       <button tuiButton type="submit">Войти</button>
     </footer>
